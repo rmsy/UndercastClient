@@ -63,4 +63,23 @@ public class AresCustomMethods {
             return round(k / kk);
         }
     }
+    
+    /**
+     * Detects if the server is the lobby and resets
+     * values which need to be reseted
+     */
+    public static void handleServerSwap() {
+    	if(AresData.server.equalsIgnoreCase("lobby")) {
+    		AresData.isLobby = true;
+    	} else {
+    		AresData.isLobby = false;
+    	}
+    	AresData.setTeam(AresData.Teams.Observers);
+    	
+    	AresData.resetDeaths();
+    	AresData.resetKills();
+    	AresData.resetKilled();
+    	AresData.resetKillstreak();
+    	AresData.resetLargestKillstreak();
+    }
 }

@@ -133,7 +133,7 @@ public class mod_Ares extends BaseMod {
             }
 
             // Team display (based on color)
-            if (CONFIG.showTeam) {
+            if (CONFIG.showTeam && !AresData.isLobby) {
                 mc.fontRenderer.drawStringWithShadow("Team: " + AresData.getTeam(), width, height, getTeamColors());
                 height += 8;
             }
@@ -143,7 +143,7 @@ public class mod_Ares extends BaseMod {
                 height += 8;
             }
             // Map fetcher:
-//            if (CONFIG.showMap) {
+//            if (CONFIG.showMap && !AresData.isLobby) {
 //                if (AresData.getMap() != null) {
 //                    mc.fontRenderer.drawStringWithShadow("Current Map: \u00A7d" + AresData.getMap(), width, height, 16777215);
 //                    height += 8;
@@ -154,7 +154,7 @@ public class mod_Ares extends BaseMod {
 //                }
 //            }
 //            // Show next map
-//            if (CONFIG.showNextMap) {
+//            if (CONFIG.showNextMap && !AresData.isLobby) {
 //                if (AresData.getNextMap() != null) {
 //                    mc.fontRenderer.drawStringWithShadow("Next Map: \u00A7d" + AresData.getNextMap(), width, height, 16777215);
 //                    height += 8;
@@ -164,27 +164,27 @@ public class mod_Ares extends BaseMod {
 //                }
 //            }
             //Show KD Ratio
-            if (CONFIG.showKD) {
+            if (CONFIG.showKD && !AresData.isLobby) {
                 mc.fontRenderer.drawStringWithShadow("K/D: \u00A73" + AresCustomMethods.getKD(), width, height, 16777215);
                 height += 8;
             }
             //show KK Ratio
-            if (CONFIG.showKK) {
+            if (CONFIG.showKK && !AresData.isLobby) {
                 mc.fontRenderer.drawStringWithShadow("K/K: \u00A73" + AresCustomMethods.getKK(), width, height, 16777215);
                 height += 8;
             }
             //show amount of kills
-            if (CONFIG.showKills) {
+            if (CONFIG.showKills && !AresData.isLobby) {
                 mc.fontRenderer.drawStringWithShadow("Kills: \u00A7a" + AresData.getKills(), width, height, 16777215);
                 height += 8;
             }
             //show amount of deaths
-            if (CONFIG.showDeaths) {
+            if (CONFIG.showDeaths && !AresData.isLobby) {
                 mc.fontRenderer.drawStringWithShadow("Deaths: \u00A74" + AresData.getDeaths(), width, height, 16777215);
                 height += 8;
             }
             // Kill Streak display
-            if (CONFIG.showStreak) {
+            if (CONFIG.showStreak && !AresData.isLobby) {
                 mc.fontRenderer.drawStringWithShadow("Current Killstreak: \u00A75" + (int)AresData.getKillstreak() + "/" + (int)AresData.getLargestKillstreak(), width, height, 16777215);
                 height += 8;
             }
@@ -231,7 +231,8 @@ public class mod_Ares extends BaseMod {
         //if logging onto a project ares server, then enable the main mod
         if (var1.getNetManager().getSocketAddress().toString().contains("us.oc.tc")) {
             // What happens if logs into project ares
-            AresData.isPA=true;
+            AresData.isPA = true;
+            AresData.isLobby = true;
             AresData.guiShowing = true;
             System.out.println("Ares mod activated!");
             AresData.setTeam(AresData.Teams.Observers);

@@ -27,6 +27,7 @@ public class AresData {
     public static String server;
     public static Teams team;
     public static boolean isPA;
+    public static boolean isLobby;
     public static boolean update;
     public static String updateLink;
     private static MatchLoaderThread mapLoader;

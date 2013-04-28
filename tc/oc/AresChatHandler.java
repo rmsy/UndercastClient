@@ -60,7 +60,6 @@ public class AresChatHandler {
             AresData.resetKilled();
             AresData.resetDeaths();
             AresData.resetKillstreak();
-            ;
             AresData.resetLargestKillstreak();
             
             try {
@@ -106,9 +105,11 @@ public class AresChatHandler {
         else if(message.contains("Teleporting you to ")) {
         	AresData.setServer(message.replace("Teleporting you to ", ""));
         	AresData.welcomeMessageExpected = true;
+        	AresCustomMethods.handleServerSwap();
         }
         else if(message.contains("You are currently on ")) {
         	AresData.setServer(message.replace("You are currently on ", ""));
+        	AresCustomMethods.handleServerSwap();
         }
     }
 }
