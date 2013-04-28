@@ -92,8 +92,23 @@ public class AresChatHandler {
             Minecraft.getMinecraft().ingameGUI.getChatGUI().deleteChatLine(0);
         }
         //sends /match when you join a server.
-        else if(message.equals("Welcome to Project Ares") && mod_Ares.CONFIG.matchOnServerJoin){
-        	Minecraft.getMinecraft().thePlayer.sendChatMessage("/match");
+        else if(message.equals("Welcome to Project Ares")){
+        	if(!AresData.welcomeMessageExpected) {
+        		Minecraft.getMinecraft().thePlayer.sendChatMessage("/server");
+        	} else {
+        		AresData.welcomeMessageExpected = false;
+        	}
+        	if(mod_Ares.CONFIG.matchOnServerJoin && !AresData.server.equalsIgnoreCase("lobby")) {
+        		Minecraft.getMinecraft().thePlayer.sendChatMessage("/match");
+        	}
+        }
+        //server detection
+        else if(message.contains("Teleporting you to ")) {
+        	AresData.setServer(message.replace("Teleporting you to ", ""));
+        	AresData.welcomeMessageExpected = true;
+        }
+        else if(message.contains("You are currently on ")) {
+        	AresData.setServer(message.replace("You are currently on ", ""));
         }
     }
 }

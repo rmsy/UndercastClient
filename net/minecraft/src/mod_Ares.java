@@ -88,7 +88,7 @@ public class mod_Ares extends BaseMod {
      */
     public boolean onTickInGame(float time, Minecraft mc) {
         AresData.update();
-
+        
         //if the game over screen is active then you have died
         //if it is the first time it is active count a death
         //if it is not don't do anything
@@ -127,10 +127,10 @@ public class mod_Ares extends BaseMod {
         //if chat is open and config says yes then show gui
         if (AresData.isPlayingAres() && AresData.guiShowing && (mc.inGameHasFocus || CONFIG.showGuiChat && mc.currentScreen instanceof GuiChat)) {
             // Server display
-//            if (CONFIG.showServer) {
-//                mc.fontRenderer.drawStringWithShadow("Server: \u00A76" + AresData.getServer(), width, height, 16777215);
-//                height += 8;
-//            }
+            if (CONFIG.showServer) {
+                mc.fontRenderer.drawStringWithShadow("Server: \u00A76" + AresData.getServer(), width, height, 16777215);
+                height += 8;
+            }
 
             // Team display (based on color)
             if (CONFIG.showTeam) {
@@ -227,9 +227,7 @@ public class mod_Ares extends BaseMod {
      * Sets variables if the server is a Ares server
      */
     public void clientConnect(NetClientHandler var1) {
-        AresData.setTeam(AresData.Teams.Observers);
-//        System.out.println("Client successfully connected to " + var1.getNetManager().getSocketAddress().toString());
-//        
+        AresData.setTeam(AresData.Teams.Observers); 
         //if logging onto a project ares server, then enable the main mod
         if (var1.getNetManager().getSocketAddress().toString().contains("us.oc.tc")) {
             // What happens if logs into project ares
@@ -238,7 +236,7 @@ public class mod_Ares extends BaseMod {
             System.out.println("Ares mod activated!");
             AresData.setTeam(AresData.Teams.Observers);
             AresData.isPA = true;
-            AresData.setServer(AresCustomMethods.getServer(var1.getNetManager().getSocketAddress().toString()));
+            AresData.setServer("Lobby");
         } else{
             AresData.isPA=false;
         }
@@ -278,6 +276,8 @@ public class mod_Ares extends BaseMod {
             brightActive=false;
             mc.gameSettings.gammaSetting=defaultLevel;
         }
+        // for the next connect
+        AresData.welcomeMessageExpected = true;
     }
 
     /**

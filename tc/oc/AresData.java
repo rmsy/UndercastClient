@@ -32,6 +32,8 @@ public class AresData {
     private static MatchLoaderThread mapLoader;
     private static boolean mapLoaderFinished;
     public static String[][] mapData;
+    // if it's true, the /server comand isn't executed after a "Welcome to Project Ares" message
+    public static boolean welcomeMessageExpected = true;
 
     public static boolean guiShowing;
     public static KeyBinding keybind;
