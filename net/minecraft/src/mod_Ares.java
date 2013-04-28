@@ -24,7 +24,6 @@ public class mod_Ares extends BaseMod {
     protected Minecraft mc = Minecraft.getMinecraft();
     private boolean deathScreenActive;
     private boolean mainMenuActive;
-    public static ArrayList<String> masterServerList = new ArrayList<String>();
     public static AresConfig CONFIG;
     public static boolean brightActive;
     public float brightLevel = (float) 20.0D;
@@ -62,84 +61,6 @@ public class mod_Ares extends BaseMod {
         ModLoader.registerKey(this, AresData.keybind, false);
         ModLoader.registerKey(this, AresData.keybind2, false);
         ModLoader.registerKey(this, AresData.keybind3, false);
-
-        //Pulls servers from web for GUI Server List and sorts them
-        masterServerList = getServers();
-
-        //start thread for the main menu button
-        Thread thread = new Thread() {
-            public void run() {
-                while (true) {
-                    //if the main menu is active then add a button
-                    if (mc.currentScreen instanceof GuiMainMenu && mc.currentScreen.buttonList.size() > 0 && CONFIG.showGuiMulti) {
-                        //if you have not added the button already then add it
-                        if (!mainMenuActive) {
-                            //edit the current multiplayer button
-                            GuiButton multi = ((GuiButton) mc.currentScreen.buttonList.get(1));
-                            multi.width = (multi.width / 2) - 1;
-                            mc.currentScreen.buttonList.set(1, multi);
-                            //get values
-                            int y = multi.yPosition;
-                            int x = multi.xPosition + multi.width + 2;
-                            int height = multi.height;
-                            int width = multi.width;
-                            //add the custom ares button
-                            AresMenuButton test = new AresMenuButton(-1, x, y, width, height, "Project Ares");
-                            mc.currentScreen.buttonList.add(test);
-                            mc.currentScreen.updateScreen();
-                            mainMenuActive = true;
-                        }
-                    } else {
-                        mainMenuActive = false;
-                    }
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                    }
-                }
-            }
-        };
-        thread.start();
-    }
-
-    /**
-     * Finds the current list of servers from the website.
-     *
-     * @return ArrayList of server ips
-     */
-    public static ArrayList<String> getServers() {
-        ArrayList<String> list = new ArrayList<String>();
-
-        try {
-            URL url = new URL("https://oc.tc/play");
-            URLConnection con = url.openConnection();
-            con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11");
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                if (line.startsWith("<li>") && line.endsWith("</li>")) {
-                    list.add(line.replace("<li>", "").replace("</li>", ""));
-                }
-            }
-        } catch (Exception ignored) {
-            System.err.println("[ProjectAres]: ERROR: Could not get online list of servers");
-            //if you can't get it from the website load defaults
-            list.clear();
-            list.add("alpha.oc.tc");
-            list.add("beta.oc.tc");
-            list.add("gamma.oc.tc");
-            list.add("delta.oc.tc");
-            list.add("epsilon.oc.tc");
-            list.add("zeta.oc.tc");
-            list.add("eta.oc.tc");
-            list.add("theta.oc.tc");
-            list.add("iota.oc.tc");
-            list.add("kappa.oc.tc");
-            list.add("lambda.oc.tc");
-            list.add("nostalgia.oc.tc");
-        }
-
-        return list;
     }
 
     /**
@@ -206,10 +127,10 @@ public class mod_Ares extends BaseMod {
         //if chat is open and config says yes then show gui
         if (AresData.isPlayingAres() && AresData.guiShowing && (mc.inGameHasFocus || CONFIG.showGuiChat && mc.currentScreen instanceof GuiChat)) {
             // Server display
-            if (CONFIG.showServer) {
-                mc.fontRenderer.drawStringWithShadow("Server: \u00A76" + AresData.getServer(), width, height, 16777215);
-                height += 8;
-            }
+//            if (CONFIG.showServer) {
+//                mc.fontRenderer.drawStringWithShadow("Server: \u00A76" + AresData.getServer(), width, height, 16777215);
+//                height += 8;
+//            }
 
             // Team display (based on color)
             if (CONFIG.showTeam) {
@@ -222,26 +143,26 @@ public class mod_Ares extends BaseMod {
                 height += 8;
             }
             // Map fetcher:
-            if (CONFIG.showMap) {
-                if (AresData.getMap() != null) {
-                    mc.fontRenderer.drawStringWithShadow("Current Map: \u00A7d" + AresData.getMap(), width, height, 16777215);
-                    height += 8;
-                } else {
-                    AresData.setMap("Fetching...");
-                    mc.fontRenderer.drawStringWithShadow("Current Map: \u00A78" + AresData.getMap(), width, height, 16777215);
-                    height += 8;
-                }
-            }
-            // Show next map
-            if (CONFIG.showNextMap) {
-                if (AresData.getNextMap() != null) {
-                    mc.fontRenderer.drawStringWithShadow("Next Map: \u00A7d" + AresData.getNextMap(), width, height, 16777215);
-                    height += 8;
-                } else {
-                    mc.fontRenderer.drawStringWithShadow("Next Map: \u00A78Loading...", width, height, 16777215);
-                    height += 8;
-                }
-            }
+//            if (CONFIG.showMap) {
+//                if (AresData.getMap() != null) {
+//                    mc.fontRenderer.drawStringWithShadow("Current Map: \u00A7d" + AresData.getMap(), width, height, 16777215);
+//                    height += 8;
+//                } else {
+//                    AresData.setMap("Fetching...");
+//                    mc.fontRenderer.drawStringWithShadow("Current Map: \u00A78" + AresData.getMap(), width, height, 16777215);
+//                    height += 8;
+//                }
+//            }
+//            // Show next map
+//            if (CONFIG.showNextMap) {
+//                if (AresData.getNextMap() != null) {
+//                    mc.fontRenderer.drawStringWithShadow("Next Map: \u00A7d" + AresData.getNextMap(), width, height, 16777215);
+//                    height += 8;
+//                } else {
+//                    mc.fontRenderer.drawStringWithShadow("Next Map: \u00A78Loading...", width, height, 16777215);
+//                    height += 8;
+//                }
+//            }
             //Show KD Ratio
             if (CONFIG.showKD) {
                 mc.fontRenderer.drawStringWithShadow("K/D: \u00A73" + AresCustomMethods.getKD(), width, height, 16777215);
@@ -307,14 +228,14 @@ public class mod_Ares extends BaseMod {
      */
     public void clientConnect(NetClientHandler var1) {
         AresData.setTeam(AresData.Teams.Observers);
-        System.out.println("Client successfully connected to " + var1.getNetManager().getSocketAddress().toString());
-        
+//        System.out.println("Client successfully connected to " + var1.getNetManager().getSocketAddress().toString());
+//        
         //if logging onto a project ares server, then enable the main mod
-        if (var1.getNetManager().getSocketAddress().toString().contains("oc.tc")) {
+        if (var1.getNetManager().getSocketAddress().toString().contains("us.oc.tc")) {
             // What happens if logs into project ares
             AresData.isPA=true;
             AresData.guiShowing = true;
-            System.out.println("Connected to: " + var1.getNetManager().getSocketAddress().toString() + " Ares mod activated!");
+            System.out.println("Ares mod activated!");
             AresData.setTeam(AresData.Teams.Observers);
             AresData.isPA = true;
             AresData.setServer(AresCustomMethods.getServer(var1.getNetManager().getSocketAddress().toString()));
@@ -368,7 +289,7 @@ public class mod_Ares extends BaseMod {
             if (keybinding == AresData.keybind) {
                 AresData.guiShowing = !AresData.guiShowing;
             } else if (keybinding == AresData.keybind2) {
-                ModLoader.openGUI(mc.thePlayer, new Ares_ServerGUI(true));
+//                ModLoader.openGUI(mc.thePlayer, new Ares_ServerGUI(true));
             }
             //if you are an obs;have the config to true; toggle fullbright and play sound
             else if(AresData.isPlayingAres() && keybinding == AresData.keybind3 && AresData.team == Teams.Observers && CONFIG.fullBright){
