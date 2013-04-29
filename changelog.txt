@@ -1,5 +1,10 @@
 The changelog exists since version 1.4.0
 
+1.4.4dev
+- fix crash on server join
+- disable map fetcher until an API is implemented
+- disable updater for dev versions
+
 1.4.3dev
 - lobby support
 - server and map detection fixed
