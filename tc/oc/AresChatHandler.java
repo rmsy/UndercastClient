@@ -92,24 +92,23 @@ public class AresChatHandler {
         }
         //sends /match when you join a server.
         else if(message.contains("Welcome to")){
-        	if(!AresData.welcomeMessageExpected) {
-        		Minecraft.getMinecraft().thePlayer.sendChatMessage("/server");
-        	} else {
-        		AresData.welcomeMessageExpected = false;
-        	}
-        	if(mod_Ares.CONFIG.matchOnServerJoin && !AresData.server.equalsIgnoreCase("lobby")) {
-        		Minecraft.getMinecraft().thePlayer.sendChatMessage("/match");
-        	}
+            if(!AresData.welcomeMessageExpected) {
+                Minecraft.getMinecraft().thePlayer.sendChatMessage("/server");
+            } else {
+                AresData.welcomeMessageExpected = false;
+            }
+            if(mod_Ares.CONFIG.matchOnServerJoin && !AresData.server.equalsIgnoreCase("lobby")) {
+                Minecraft.getMinecraft().thePlayer.sendChatMessage("/match");
+            }
         }
         //server detection
         else if(message.contains("Teleporting you to ")) {
-        	AresData.setServer(message.replace("Teleporting you to ", ""));
-        	AresData.welcomeMessageExpected = true;
-        	AresCustomMethods.handleServerSwap();
-        }
-        else if(message.contains("You are currently on ")) {
-        	AresData.setServer(message.replace("You are currently on ", ""));
-        	AresCustomMethods.handleServerSwap();
+            AresData.setServer(message.replace("Teleporting you to ", ""));
+            AresData.welcomeMessageExpected = true;
+            AresCustomMethods.handleServerSwap();
+        } else if(message.contains("You are currently on ")) {
+            AresData.setServer(message.replace("You are currently on ", ""));
+            AresCustomMethods.handleServerSwap();
         }
     }
 }
