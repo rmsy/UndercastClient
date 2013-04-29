@@ -8,7 +8,7 @@ import net.minecraft.src.KeyBinding;
 import net.minecraft.src.mod_Ares;
 import org.lwjgl.input.Keyboard;
 
-import tc.oc.internetTools.MatchLoaderThread;
+import tc.oc.internetTools.InformationLoaderThread;
 import tc.oc.internetTools.ServerStatusHTMLParser;
 
 import java.net.URL;
@@ -30,7 +30,7 @@ public class AresData {
     public static boolean isLobby;
     public static boolean update;
     public static String updateLink;
-    private static MatchLoaderThread mapLoader;
+    private static InformationLoaderThread mapLoader;
     private static boolean mapLoaderFinished;
     public static String[][] mapData;
     // if it's true, the /server comand isn't executed after a "Welcome to Project Ares" message
@@ -57,7 +57,7 @@ public class AresData {
         keybind3 = new KeyBinding("fullBright", Keyboard.getKeyIndex(mod_Ares.CONFIG.keyGui3));
         mapLoaderFinished = false;
         try {
-            mapLoader = new MatchLoaderThread(new URL("https://oc.tc/play"));
+            mapLoader = new InformationLoaderThread(new URL("https://oc.tc/play"));
         } catch(Exception e) {
             System.out.println("[ProjectAres]: Failed to load maps");
             System.out.println("[ProjectAres]: ERROR: " + e.toString());
@@ -91,7 +91,7 @@ public class AresData {
         nextMap = "Loading...";
 
         try {
-            mapLoader = new MatchLoaderThread(new URL("https://oc.tc/play"));
+            mapLoader = new InformationLoaderThread(new URL("https://oc.tc/play"));
         } catch(Exception e) {
             System.out.println("[ProjectAres]: Failed to load maps");
             System.out.println("[ProjectAres]: ERROR: " + e.toString());
