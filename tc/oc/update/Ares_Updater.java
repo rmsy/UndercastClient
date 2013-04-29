@@ -21,13 +21,13 @@ public class Ares_Updater {
             //download link
             URL data = new URL("https://dl.dropbox.com/s/v4jjlnky1wpwywv/version.txt");
             final BufferedReader in = new BufferedReader(new InputStreamReader(data.openStream()));
-            readline = in.readLine();     
+            readline = in.readLine();
             readline2 = in.readLine();
         } catch (Exception e) {
             AresData.setUpdate(false);
             AresData.setUpdateLink("Could not get update information.");
         }
-        if(!mod_Ares.MOD_VERSION.equalsIgnoreCase(readline)){
+        if(!mod_Ares.MOD_VERSION.equalsIgnoreCase(readline) && !mod_Ares.MOD_VERSION.contains("dev")){
             AresData.setUpdate(false);
             AresData.setUpdateLink(readline2);
         }
