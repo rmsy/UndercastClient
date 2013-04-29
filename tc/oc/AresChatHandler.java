@@ -91,7 +91,7 @@ public class AresChatHandler {
             Minecraft.getMinecraft().ingameGUI.getChatGUI().deleteChatLine(0);
         }
         //sends /match when you join a server.
-        else if(message.equals("Welcome to Project Ares")){
+        else if(message.contains("Welcome to")){
         	if(!AresData.welcomeMessageExpected) {
         		Minecraft.getMinecraft().thePlayer.sendChatMessage("/server");
         	} else {
