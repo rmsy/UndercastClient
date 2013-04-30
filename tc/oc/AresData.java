@@ -65,26 +65,25 @@ public class AresData {
     }
 
     public static void update() {
-        //disabled temporarily
-//        if(!mapLoaderFinished && mapLoader.getContents() != null) {
-//            mapLoaderFinished = true;
-//            try {
-//                mapData = ServerStatusHTMLParser.parse(mapLoader.getContents());
-//            } catch (Exception e) {
-//                System.out.println("[ProjectAres]: Failed to parse maps");
-//                System.out.println("[ProjectAres]: ERROR: " + e.toString());
-//            }
-//            // set the map
-//            for(int c = 0; c < mapData.length; c++) {
-//                if(mapData[c][0] == null) {
-//                    break;
-//                }
-//                if(mapData[c][0].replace(" ", "").equalsIgnoreCase(server)) { // that space in the server name has taken me a lot of time
-//                    map = mapData[c][2].replace("Now: ", "");
-//                    nextMap = mapData[c][3].replace("Next: ", "");
-//                }
-//            }
-//        }
+        if(!mapLoaderFinished && mapLoader.getContents() != null) {
+            mapLoaderFinished = true;
+            try {
+                mapData = ServerStatusHTMLParser.parse(mapLoader.getContents());
+                // set the map
+                for(int c = 0; c < mapData.length; c++) {
+                    if(mapData[c][0] == null) {
+                        break;
+                    }
+                    if(mapData[c][0].replace(" ", "").equalsIgnoreCase(server)) { // that space in the server name has taken me a lot of time
+                        map = mapData[c][2];
+                        nextMap = mapData[c][3];
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("[ProjectAres]: Failed to parse maps");
+                System.out.println("[ProjectAres]: ERROR: " + e.toString());
+            }
+        }
     }
 
     public static void reload() {

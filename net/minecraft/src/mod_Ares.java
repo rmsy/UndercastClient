@@ -142,27 +142,27 @@ public class mod_Ares extends BaseMod {
                 mc.fontRenderer.drawStringWithShadow("Friends Online: \u00A73" + AresData.getFriends(), width, height, 16777215);
                 height += 8;
             }
-//            // Map fetcher:
-//            if (CONFIG.showMap && !AresData.isLobby) {
-//                if (AresData.getMap() != null) {
-//                    mc.fontRenderer.drawStringWithShadow("Current Map: \u00A7d" + AresData.getMap(), width, height, 16777215);
-//                    height += 8;
-//                } else {
-//                    AresData.setMap("Fetching...");
-//                    mc.fontRenderer.drawStringWithShadow("Current Map: \u00A78" + AresData.getMap(), width, height, 16777215);
-//                    height += 8;
-//                }
-//            }
-//            // Show next map
-//            if (CONFIG.showNextMap && !AresData.isLobby) {
-//                if (AresData.getNextMap() != null) {
-//                    mc.fontRenderer.drawStringWithShadow("Next Map: \u00A7d" + AresData.getNextMap(), width, height, 16777215);
-//                    height += 8;
-//                } else {
-//                    mc.fontRenderer.drawStringWithShadow("Next Map: \u00A78Loading...", width, height, 16777215);
-//                    height += 8;
-//                }
-//            }
+            // Map fetcher:
+            if (CONFIG.showMap && !AresData.isLobby) {
+                if (AresData.getMap() != null) {
+                    mc.fontRenderer.drawStringWithShadow("Current Map: \u00A7d" + AresData.getMap(), width, height, 16777215);
+                    height += 8;
+                } else {
+                    AresData.setMap("Fetching...");
+                    mc.fontRenderer.drawStringWithShadow("Current Map: \u00A78" + AresData.getMap(), width, height, 16777215);
+                    height += 8;
+                }
+            }
+            // Show next map
+            if (CONFIG.showNextMap && !AresData.isLobby) {
+                if (AresData.getNextMap() != null) {
+                    mc.fontRenderer.drawStringWithShadow("Next Map: \u00A7d" + AresData.getNextMap(), width, height, 16777215);
+                    height += 8;
+                } else {
+                    mc.fontRenderer.drawStringWithShadow("Next Map: \u00A78Loading...", width, height, 16777215);
+                    height += 8;
+                }
+            }
             //Show KD Ratio
             if (CONFIG.showKD && !AresData.isLobby) {
                 mc.fontRenderer.drawStringWithShadow("K/D: \u00A73" + AresCustomMethods.getKD(), width, height, 16777215);
