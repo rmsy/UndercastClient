@@ -13,13 +13,16 @@ import tc.oc.AresData;
 import net.minecraft.src.mod_Ares;
 
 public class Ares_Updater {
-
+    boolean errorOccured;
+    
     public Ares_Updater(){
-        String readline="";
-        String readline2="Could not get update information.";
+        String readline = "";
+        String readline2 = "Could not get update information.";
+        errorOccured = false;
         try {
             //download link
-            URL data = new URL("https://dl.dropbox.com/s/v4jjlnky1wpwywv/version.txt");
+            URL data = new URL("https://raw.github.com/UnofficalProjectAresTeam/mod_Ares/master/version.txt"); // forge version should use forge instead of master
+//            URL data = new URL("https://dl.dropbox.com/s/v4jjlnky1wpwywv/version.txt"); 
             final BufferedReader in = new BufferedReader(new InputStreamReader(data.openStream()));
             readline = in.readLine();
             readline2 = in.readLine();
@@ -27,9 +30,42 @@ public class Ares_Updater {
             AresData.setUpdate(false);
             AresData.setUpdateLink("Could not get update information.");
         }
-        if(!mod_Ares.MOD_VERSION.equalsIgnoreCase(readline) && !mod_Ares.MOD_VERSION.contains("dev")){
+        if(!mod_Ares.MOD_VERSION.contains("dev") && compareVersions(readline)){
             AresData.setUpdate(false);
-            AresData.setUpdateLink(readline2);
+            if(!errorOccured) {
+                AresData.setUpdateLink(readline2);
+            } else {
+                AresData.setUpdateLink("An unknown error occured while getting the update information.");
+            }
+        }
+    }
+
+    /**
+     * @return true if the current version number is lower than the latest version = update necessary
+     */
+    private boolean compareVersions(String internetVersion) {
+        try {
+            String debug[] = mod_Ares.MOD_VERSION.split("[.]");
+            int majorVersionMod = Integer.parseInt(mod_Ares.MOD_VERSION.split("[.]")[0]);;
+            int majorVersionLatest = Integer.parseInt(internetVersion.split("[.]")[0]);
+            int minorVersionMod = Integer.parseInt(mod_Ares.MOD_VERSION.split("[.]")[1]);;
+            int minorVersionLatest = Integer.parseInt(internetVersion.split("[.]")[1]);
+            int revisionMod = Integer.parseInt(mod_Ares.MOD_VERSION.split("[.]")[2]);;
+            int revisionLatest = Integer.parseInt(internetVersion.split("[.]")[2]);;
+            
+            if (majorVersionMod < majorVersionLatest) {
+                return true;
+            } else if (majorVersionMod == majorVersionLatest && minorVersionMod < minorVersionLatest) {
+                return true;
+            } else if (majorVersionMod == majorVersionLatest && minorVersionMod == minorVersionLatest && revisionMod < revisionLatest) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            // failed to compare the data, sending update message.
+            errorOccured = true;
+            return true;
         }
     }
 }
