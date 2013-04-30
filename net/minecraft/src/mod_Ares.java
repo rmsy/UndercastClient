@@ -206,7 +206,7 @@ public class mod_Ares extends BaseMod {
         //gui display for obs if you have brightness
         if(AresData.isPlayingAres() && AresData.guiShowing && (mc.inGameHasFocus || CONFIG.showGuiChat && mc.currentScreen instanceof GuiChat)){
             if(brightActive && CONFIG.fullBright && AresData.team == Teams.Observers){
-        	 mc.fontRenderer.drawStringWithShadow("Full Bright: \u00A72ON", width, height, 16777215);
+                mc.fontRenderer.drawStringWithShadow("Full Bright: \u00A72ON", width, height, 16777215);
                  height += 8;
             }else if(!brightActive && CONFIG.fullBright && AresData.team == Teams.Observers){
         	 mc.fontRenderer.drawStringWithShadow("Full Bright: \u00A7cOFF", width, height, 16777215);
@@ -294,14 +294,14 @@ public class mod_Ares extends BaseMod {
             }
             //if you are an obs;have the config to true; toggle fullbright and play sound
             else if(AresData.isPlayingAres() && keybinding == AresData.keybind3 && AresData.team == Teams.Observers && CONFIG.fullBright){
-        	if(mc.inGameHasFocus){
-        	    brightActive = !brightActive;
-        	    if(brightActive)
-        		mc.gameSettings.gammaSetting = brightLevel;
-        	    else
-        		mc.gameSettings.gammaSetting = defaultLevel;
-        	    mc.sndManager.playSoundFX("random.click", 0.5F, 1.0F);
-        	}
+                if(mc.inGameHasFocus){
+                    brightActive = !brightActive;
+                    if(brightActive)
+                        mc.gameSettings.gammaSetting = brightLevel;
+                    else
+                        mc.gameSettings.gammaSetting = defaultLevel;
+                    mc.sndManager.playSoundFX("random.click", 0.5F, 1.0F);
+                }
             }
         }
     }
