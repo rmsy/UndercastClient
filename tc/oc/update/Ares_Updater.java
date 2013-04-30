@@ -22,7 +22,6 @@ public class Ares_Updater {
         try {
             //download link
             URL data = new URL("https://raw.github.com/UnofficalProjectAresTeam/mod_Ares/master/version.txt"); // forge version should use forge instead of master
-//            URL data = new URL("https://dl.dropbox.com/s/v4jjlnky1wpwywv/version.txt"); 
             final BufferedReader in = new BufferedReader(new InputStreamReader(data.openStream()));
             readline = in.readLine();
             readline2 = in.readLine();
