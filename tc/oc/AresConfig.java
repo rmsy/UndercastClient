@@ -54,7 +54,7 @@ public class AresConfig {
         defaults.setProperty("showTeam", "true");
         defaults.setProperty("showKD", "true");
         defaults.setProperty("showKK", "true");
-        defaults.setProperty("showFriends", "true");
+        defaults.setProperty("showFriends", "false");
         defaults.setProperty("showMap", "true");
         defaults.setProperty("showNextMap", "true");
         defaults.setProperty("showStreak", "true");
@@ -127,7 +127,7 @@ public class AresConfig {
             config.setProperty("showTeam", "true");
             config.setProperty("showKD", "true");
             config.setProperty("showKK", "true");
-            config.setProperty("showFriends", "true");
+            config.setProperty("showFriends", "false");
             config.setProperty("showMap", "true");
             config.setProperty("showNextMap", "true");
             config.setProperty("showStreak", "true");
@@ -287,4 +287,3 @@ public class AresConfig {
         }
     }
 }
-
