@@ -12,10 +12,10 @@ import tc.oc.AresData;
 
 import net.minecraft.src.mod_Ares;
 
-public class Ares_Updater {
+public class Ares_UpdaterThread {
     boolean errorOccured;
     
-    public Ares_Updater(){
+    public Ares_UpdaterThread(){
         String readline = "";
         String readline2 = "Could not get update information.";
         errorOccured = false;

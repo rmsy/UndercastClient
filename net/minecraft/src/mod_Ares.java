@@ -52,7 +52,7 @@ public class mod_Ares extends BaseMod {
         new AresData();
         
         //check for update
-        new Ares_Updater();
+        new Ares_UpdaterThread();
         
         //load the new controls menu
         controlAres = new ControlsAres();
