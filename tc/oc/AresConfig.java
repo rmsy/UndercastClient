@@ -14,7 +14,7 @@ public class AresConfig {
     private Properties config;
     
     // update this value to change the config version.
-    private static int version = 2;
+    private static int version = 3;
 
     // main variables
     public static boolean showFPS;
@@ -40,6 +40,7 @@ public class AresConfig {
     public static boolean filterTips;
     public static boolean fullBright;
     public static boolean matchOnServerJoin;
+    public static boolean enableButtonTooltips;
     public static int configVersion;
 
     /**
@@ -69,6 +70,7 @@ public class AresConfig {
         defaults.setProperty("filterTips", "true");
         defaults.setProperty("fullBright", "true");
         defaults.setProperty("matchOnServerJoin", "false");
+        defaults.setProperty("enableButtonTooltips", "true");
         // if the value is missing, it should force an update. Don't change it.
         defaults.setProperty("configVersion", "0");
     }
@@ -142,6 +144,7 @@ public class AresConfig {
             config.setProperty("filterTips", "true");
             config.setProperty("fullBright", "true");
             config.setProperty("matchOnServerJoin", "false");
+            config.setProperty("enableButtonTooltips", "true");
             config.setProperty("configVersion", ""+version);
 
             config.store(new FileOutputStream(configPath +"mod_Ares.cfg"),"This is the Unoffical Project Ares Mod Config" + "\nCustomize it to your taste" + "\nkeyGui = Ingame Stats" +"\nkeyGui2 = Ingame Server Menu" + "\nkeyGui3 = Full Bright\n");
@@ -178,6 +181,7 @@ public class AresConfig {
         filterTips = this.getBoolProperty("filterTips");
         fullBright = this.getBoolProperty("fullBright");
         matchOnServerJoin = this.getBoolProperty("matchOnServerJoin");
+        enableButtonTooltips = this.getBoolProperty("enableButtonTooltips");
         configVersion = this.getIntProperty("configVersion");
         
         checkForConfigUpdate();
@@ -280,6 +284,10 @@ public class AresConfig {
                     config.setProperty("showNextMap", "true");
                 }
             case 2:
+                if(enableButtonTooltips == true) {
+                    config.setProperty("enableButtonTooltips", "true");
+                }
+            case 3:
                 // for the next version.
             }
             config.setProperty("configVersion", ""+version);

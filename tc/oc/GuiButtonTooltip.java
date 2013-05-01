@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.RenderHelper;
+import net.minecraft.src.mod_Ares;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -43,7 +44,7 @@ public class GuiButtonTooltip extends GuiButton {
             {
                 l = 16777120;
             }
-            if (k == 2) {
+            if (k == 2 && mod_Ares.CONFIG.enableButtonTooltips) {
                 drawHoveringText(Arrays.asList(xpl), par2, par3, fontrenderer);
             }
             this.drawCenteredString(fontrenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
