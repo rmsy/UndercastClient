@@ -50,6 +50,7 @@ public class Ares_ServerGUI extends GuiScreen {
         this.buttonList.add(new GuiButton(2, this.width / 2 + 2, height - 28, 98, 20, stringtranslate.translateKey("gui.cancel")));
         this.buttonList.add(new GuiButton(3, this.width / 2 - 100, height - 28, 98, 20, "Player Stats"));
         this.buttonList.add(new GuiButton(4, this.width / 2 - 150, height - 28, 48, 20, sortNames[sortIndex]));
+        this.buttonList.add(new GuiButton(5, this.width / 2 + 102, height - 28, 48, 20, "Lobby"));
         guiServerInfoSlot = new Ares_ServerInfoSlotGui(this);
     }
 
@@ -193,6 +194,14 @@ public class Ares_ServerGUI extends GuiScreen {
 //                pollServers();
 //            }
 //
+        }
+        if(guibutton.id == 5) {
+            if(inGame) {
+                Minecraft.getMinecraft().thePlayer.sendChatMessage("/server lobby");
+            } else {
+                ServerData joinServer = new ServerData("us.oc.tc", "us.oc.tc:25565");
+                mc.displayGuiScreen(new GuiConnecting(this, this.mc, joinServer));
+            }
         }
     }
 
