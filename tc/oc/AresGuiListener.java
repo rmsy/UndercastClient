@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import org.lwjgl.input.Keyboard;
 import tc.oc.server.Ares_ServerGUI;
+import tc.oc.controls.*;
 
 public class AresGuiListener extends Thread {
 
@@ -28,22 +29,9 @@ public class AresGuiListener extends Thread {
             else if (mc.currentScreen instanceof GuiMainMenu) {
                 displayGui = true;
             }
-            //Suppose to allow for ingame editing of controls
-            //buggy needs to get fixed
-            else if (mc.currentScreen instanceof GuiControls) {
-                if (!Keyboard.getKeyName(AresData.keybind.keyCode).toUpperCase().equals(mod_Ares.CONFIG.keyGui.toUpperCase())) {
-                    mod_Ares.CONFIG.setProperty("keyGui", Keyboard.getKeyName(AresData.keybind.keyCode).toUpperCase());
-                    mod_Ares.CONFIG.loadConfigData();
-                }
-
-                if (!Keyboard.getKeyName(AresData.keybind2.keyCode).toUpperCase().equals(mod_Ares.CONFIG.keyGui2.toUpperCase())) {
-                    mod_Ares.CONFIG.setProperty("keyGui2", Keyboard.getKeyName(AresData.keybind2.keyCode).toUpperCase());
-                    mod_Ares.CONFIG.loadConfigData();
-                }
-            }
             //sleep the listener for a bit
             try {
-                Thread.sleep(1);
+                Thread.sleep(5);
             } catch (InterruptedException e) {
             }
         }
