@@ -281,7 +281,13 @@ public class mod_Ares extends BaseMod {
             Thread thread = new Thread() {
                 public void run() {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(3000);
+                        for(int c = 0; c < 10; c++) { // don't wait longer than 10 sec
+                            Thread.sleep(1000);
+                            if(Ares_UpdaterThread.finished) {
+                                break;
+                            }
+                        }
                     } catch (InterruptedException e) {
                     }
                     mc.thePlayer.addChatMessage("\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-");

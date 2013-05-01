@@ -12,10 +12,21 @@ import tc.oc.AresData;
 
 import net.minecraft.src.mod_Ares;
 
-public class Ares_UpdaterThread {
+public class Ares_UpdaterThread extends Thread{
     boolean errorOccured;
+    public static boolean finished = false;
     
     public Ares_UpdaterThread(){
+        errorOccured = false;
+        try {
+            start();
+        } catch(Exception e) {
+            System.out.println("[ProjectAres]: Failed to check for updates");
+            System.out.println("[ProjectAres]: ERROR: " + e.toString());
+        }
+    }
+
+    public void run() {
         String readline = "";
         String readline2 = "Could not get update information.";
         errorOccured = false;
@@ -37,6 +48,7 @@ public class Ares_UpdaterThread {
                 AresData.setUpdateLink("An unknown error occured while getting the update information.");
             }
         }
+        finished = true;
     }
 
     /**
