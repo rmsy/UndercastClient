@@ -5,25 +5,24 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.src.FontRenderer;
+import net.minecraft.src.GuiButton;
+import net.minecraft.src.RenderHelper;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 
 public class GuiButtonTooltip extends GuiButton {
-	private String xpl;
-	public GuiButtonTooltip(int par1, int par2, int par3, int par4, int par5,
-			String par6Str, String par7str) {
-		super(par1, par2, par3, par4, par5, par6Str);
-		xpl = par7str;
-		// TODO Auto-generated constructor stub
-	}
+    private String xpl;
+    public GuiButtonTooltip(int par1, int par2, int par3, int par4, int par5,
+            String par6Str, String par7str) {
+        super(par1, par2, par3, par4, par5, par6Str);
+        xpl = par7str;
+    }
 
-	@Override
-	public void drawButton(Minecraft par1Minecraft, int par2, int par3)
+    @Override
+    public void drawButton(Minecraft par1Minecraft, int par2, int par3)
     {
         if (this.drawButton)
         {
@@ -40,21 +39,18 @@ public class GuiButtonTooltip extends GuiButton {
             if (!this.enabled)
             {
                 l = -6250336;
-            }
-            else if (this.field_82253_i)
+            } else if (this.field_82253_i)
             {
                 l = 16777120;
             }
-            
-            if (k == 2)
-            	drawHoveringText(Arrays.asList(xpl), par2, par3, fontrenderer);
-
+            if (k == 2) {
+                drawHoveringText(Arrays.asList(xpl), par2, par3, fontrenderer);
+            }
             this.drawCenteredString(fontrenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
         }
     }
-	
-	
-	protected void drawHoveringText(List par1List, int par2, int par3, FontRenderer font)
+
+    protected void drawHoveringText(List par1List, int par2, int par3, FontRenderer font)
     {
         if (!par1List.isEmpty())
         {
