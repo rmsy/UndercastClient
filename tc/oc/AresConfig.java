@@ -31,9 +31,6 @@ public class AresConfig {
     public static boolean showStreak;
     public static boolean showGuiChat;
     public static boolean showGuiMulti;
-    public static String keyGui;
-    public static String keyGui2;
-    public static String keyGui3;
     public static int x;
     public static int y;
     public static boolean toggleTitleScreenButton;
@@ -61,9 +58,6 @@ public class AresConfig {
         defaults.setProperty("showStreak", "true");
         defaults.setProperty("showGuiChat", "true");
         defaults.setProperty("showGuiMulti", "true");
-        defaults.setProperty("keyGui", "F6");
-        defaults.setProperty("keyGui2", "L");
-        defaults.setProperty("keyGui3", "G");
         defaults.setProperty("X", "2");
         defaults.setProperty("Y", "2");
         defaults.setProperty("toggleTitleScreenButton", "true");
@@ -135,9 +129,6 @@ public class AresConfig {
             config.setProperty("showStreak", "true");
             config.setProperty("showGuiChat", "true");
             config.setProperty("showGuiMulti", "true");
-            config.setProperty("keyGui", "F6");
-            config.setProperty("keyGui2", "L");
-            config.setProperty("keyGui3", "G");
             config.setProperty("X", "2");
             config.setProperty("Y", "2");
             config.setProperty("toggleTitleScreenButton", "true");
@@ -172,9 +163,6 @@ public class AresConfig {
         showStreak = this.getBoolProperty("showStreak");
         showGuiChat = this.getBoolProperty("showGuiChat");
         showGuiMulti = this.getBoolProperty("showGuiMulti");
-        keyGui = this.getStringProperty("keyGui");
-        keyGui2 = this.getStringProperty("keyGui2");
-        keyGui3 = this.getStringProperty("keyGui3");
         x = this.getIntProperty("X");
         y = this.getIntProperty("Y");
         toggleTitleScreenButton = this.getBoolProperty("toggleTitleScreenButton");
@@ -275,9 +263,6 @@ public class AresConfig {
                 }
                 if(matchOnServerJoin == false){ // do not overwrite the setting, if it isn't the default value
                     config.setProperty("matchOnServerJoin", "false");
-                }
-                if(keyGui3.equals("G")){
-                    config.setProperty("keyGui3", "G");
                 }
             case 1:
                 if(showNextMap == true){

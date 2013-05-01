@@ -58,10 +58,9 @@ public class AresData {
         resetLargestKillstreak();
         setTeam(Teams.Observers);
         guiShowing = true;
-        int t = Keyboard.getKeyIndex(mod_Ares.CONFIG.keyGui2);
-        keybind = new KeyBinding("gui", Keyboard.getKeyIndex(mod_Ares.CONFIG.keyGui));
-        keybind2 = new KeyBinding("inGameGui", Keyboard.getKeyIndex(mod_Ares.CONFIG.keyGui2));
-        keybind3 = new KeyBinding("fullBright", Keyboard.getKeyIndex(mod_Ares.CONFIG.keyGui3));
+        keybind = new KeyBinding("gui", Keyboard.getKeyIndex("F6"));
+        keybind2 = new KeyBinding("inGameGui", Keyboard.getKeyIndex("L"));
+        keybind3 = new KeyBinding("fullBright", Keyboard.getKeyIndex("G"));
         mapLoaderFinished = false;
         serverInformation = new AresServer[20];
         serverCount = 0;
