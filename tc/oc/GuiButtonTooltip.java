@@ -80,7 +80,7 @@ public class GuiButtonTooltip extends GuiButton {
 
             if (i1 + k > this.width)
             {
-                i1 -= 28 + k;
+                 i1 = Minecraft.getMinecraft().displayWidth / 4 - font.getStringWidth((String)par1List.get(0)) / 2;
             }
 
             if (j1 + k1 + 6 > this.height)
