@@ -52,6 +52,8 @@ public class Ares_ServerGUI extends GuiScreen {
         this.buttonList.add(new GuiButtonTooltip(3, this.width / 2 - 100, height - 28, 98, 20, "Player Stats", "Open your player stats in the browser"));
         this.buttonList.add(new GuiButtonTooltip(4, this.width / 2 - 150, height - 28, 48, 20, sortNames[sortIndex], "Sort the servers - CURRENTLY DISABLED"));
         this.buttonList.add(new GuiButtonTooltip(5, this.width / 2 + 102, height - 28, 48, 20, "Lobby", "Join / Swap to the lobby"));
+        GuiButton sortButton = (GuiButton) this.buttonList.get(4);
+        sortButton.enabled = false;
         guiServerInfoSlot = new Ares_ServerInfoSlotGui(this);
     }
 
