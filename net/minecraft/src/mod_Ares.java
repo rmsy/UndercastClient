@@ -80,7 +80,7 @@ public class mod_Ares extends BaseMod {
                             int height = multi.height;
                             int width = multi.width;
                             //add the custom ares button
-                            AresMenuButton test = new AresMenuButton(-1, x, y, width, height, "Overcast Network");
+                            AresMenuButton test = new AresMenuButton(-1, x, y, width, height, "Overcast Network", "Serverlist with Overcast Network Servers");
                             mc.currentScreen.buttonList.add(test);
                             mc.currentScreen.updateScreen();
                             mainMenuActive = true;

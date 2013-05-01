@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import tc.oc.AresData;
 import tc.oc.AresGuiListener;
+import tc.oc.GuiButtonTooltip;
 
 import java.awt.*;
 import java.net.URI;
@@ -45,12 +46,12 @@ public class Ares_ServerGUI extends GuiScreen {
     public void initGui() {
         StringTranslate stringtranslate = StringTranslate.getInstance();
 
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, height - 52, 98, 20, stringtranslate.translateKey("selectServer.select")));
-        this.buttonList.add(guibuttonrefresh = new GuiButton(1, this.width / 2 + 2, height - 52, 98, 20, stringtranslate.translateKey("selectServer.refresh")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + 2, height - 28, 98, 20, stringtranslate.translateKey("gui.cancel")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, height - 28, 98, 20, "Player Stats"));
-        this.buttonList.add(new GuiButton(4, this.width / 2 - 150, height - 28, 48, 20, sortNames[sortIndex]));
-        this.buttonList.add(new GuiButton(5, this.width / 2 + 102, height - 28, 48, 20, "Lobby"));
+        this.buttonList.add(new GuiButtonTooltip(0, this.width / 2 - 100, height - 52, 98, 20, stringtranslate.translateKey("selectServer.select"),"Join / Swap to the selected server"));
+        this.buttonList.add(guibuttonrefresh = new GuiButtonTooltip(1, this.width / 2 + 2, height - 52, 98, 20, stringtranslate.translateKey("selectServer.refresh"), "Refresh the server list"));
+        this.buttonList.add(new GuiButtonTooltip(2, this.width / 2 + 2, height - 28, 98, 20, stringtranslate.translateKey("gui.cancel"), "Close the server list"));
+        this.buttonList.add(new GuiButtonTooltip(3, this.width / 2 - 100, height - 28, 98, 20, "Player Stats", "Open your player stats in the browser"));
+        this.buttonList.add(new GuiButtonTooltip(4, this.width / 2 - 150, height - 28, 48, 20, sortNames[sortIndex], "Sort the servers\nCURRENTLY DISABLED"));
+        this.buttonList.add(new GuiButtonTooltip(5, this.width / 2 + 102, height - 28, 48, 20, "Lobby", "Join / Swap to the lobby"));
         guiServerInfoSlot = new Ares_ServerInfoSlotGui(this);
     }
 
