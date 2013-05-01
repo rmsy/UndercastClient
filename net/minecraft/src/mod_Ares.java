@@ -61,6 +61,41 @@ public class mod_Ares extends BaseMod {
         ModLoader.registerKey(this, AresData.keybind, false);
         ModLoader.registerKey(this, AresData.keybind2, false);
         ModLoader.registerKey(this, AresData.keybind3, false);
+
+        //start thread for the main menu button
+        Thread thread = new Thread() {
+            public void run() {
+                while (true) {
+                    //if the main menu is active then add a button
+                    if (mc.currentScreen instanceof GuiMainMenu && mc.currentScreen.buttonList.size() > 0 && CONFIG.showGuiMulti) {
+                        //if you have not added the button already then add it
+                        if (!mainMenuActive) {
+                            //edit the current multiplayer button
+                            GuiButton multi = ((GuiButton) mc.currentScreen.buttonList.get(1));
+                            multi.width = (multi.width / 2) - 1;
+                            mc.currentScreen.buttonList.set(1, multi);
+                            //get values
+                            int y = multi.yPosition;
+                            int x = multi.xPosition + multi.width + 2;
+                            int height = multi.height;
+                            int width = multi.width;
+                            //add the custom ares button
+                            AresMenuButton test = new AresMenuButton(-1, x, y, width, height, "Overcast Network");
+                            mc.currentScreen.buttonList.add(test);
+                            mc.currentScreen.updateScreen();
+                            mainMenuActive = true;
+                        }
+                    } else {
+                        mainMenuActive = false;
+                    }
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+        };
+        thread.start();
     }
 
     /**
@@ -290,7 +325,7 @@ public class mod_Ares extends BaseMod {
             if (keybinding == AresData.keybind) {
                 AresData.guiShowing = !AresData.guiShowing;
             } else if (keybinding == AresData.keybind2) {
-//                ModLoader.openGUI(mc.thePlayer, new Ares_ServerGUI(true));
+                ModLoader.openGUI(mc.thePlayer, new Ares_ServerGUI(true));
             }
             //if you are an obs;have the config to true; toggle fullbright and play sound
             else if(AresData.isPlayingAres() && keybinding == AresData.keybind3 && AresData.team == Teams.Observers && CONFIG.fullBright){

@@ -10,6 +10,7 @@ import org.lwjgl.input.Keyboard;
 
 import tc.oc.internetTools.InformationLoaderThread;
 import tc.oc.internetTools.ServerStatusHTMLParser;
+import tc.oc.server.AresServer;
 
 import java.net.URL;
 import java.util.HashSet;
@@ -32,9 +33,12 @@ public class AresData {
     public static String updateLink;
     private static InformationLoaderThread mapLoader;
     private static boolean mapLoaderFinished;
-    public static String[][] mapData;
+    public static AresServer[] serverInformation;
+    public static int serverCount;
     // if it's true, the /server comand isn't executed after a "Welcome to Project Ares" message
     public static boolean welcomeMessageExpected = true;
+    public static boolean redirect = false;
+    public static String directionServer;
 
     public static boolean guiShowing;
     public static KeyBinding keybind;
@@ -42,6 +46,8 @@ public class AresData {
     public static KeyBinding keybind3;
 
     public static enum Teams {Red, Blue, Purple, Cyan, Lime, Yellow, Green, Orange, Observers, Unknown};
+    public static enum MatchState {Starting, Started, Finished, Waiting, Lobby, Unknown};
+    public static enum ServerType {Lobby, Blitz, ProjectAres, Unknown};
 
     public AresData() {
         update=true;
@@ -56,6 +62,11 @@ public class AresData {
         keybind2 = new KeyBinding("inGameGui", Keyboard.getKeyIndex(mod_Ares.CONFIG.keyGui2));
         keybind3 = new KeyBinding("fullBright", Keyboard.getKeyIndex(mod_Ares.CONFIG.keyGui3));
         mapLoaderFinished = false;
+        serverInformation = new AresServer[20];
+        serverCount = 0;
+        for(int c = 0;c < serverInformation.length; c++) {
+            serverInformation[c] = new AresServer();
+        }
         try {
             mapLoader = new InformationLoaderThread(new URL("https://oc.tc/play"));
         } catch(Exception e) {
@@ -68,15 +79,30 @@ public class AresData {
         if(!mapLoaderFinished && mapLoader.getContents() != null) {
             mapLoaderFinished = true;
             try {
-                mapData = ServerStatusHTMLParser.parse(mapLoader.getContents());
-                // set the map
+                String[][] mapData = ServerStatusHTMLParser.parse(mapLoader.getContents());
+                
                 for(int c = 0; c < mapData.length; c++) {
-                    if(mapData[c][0] == null) {
+                    serverInformation[c].name = mapData[c][0];
+                    try {
+                        serverInformation[c].playerCount = Integer.parseInt(mapData[c][1]);
+                    } catch(Exception e) {
+                        serverInformation[c].playerCount = -1;
+                    }
+                    serverInformation[c].currentMap = mapData[c][2];
+                    serverInformation[c].nextMap = mapData[c][3];
+                    serverInformation[c].matchState = MatchState.Started; //API support
+                    serverInformation[c].type = ServerType.Unknown;
+                }
+                
+                // set the map
+                for(int c = 0; c < serverInformation.length; c++) {
+                    if(serverInformation[c].getServerName() == null) {
+                        serverCount = c - 1;
                         break;
                     }
-                    if(mapData[c][0].replace(" ", "").equalsIgnoreCase(server)) { // that space in the server name has taken me a lot of time
-                        map = mapData[c][2];
-                        nextMap = mapData[c][3];
+                    if(serverInformation[c].name.replace(" ", "").equalsIgnoreCase(server)) { // that space in the server name has taken me a lot of time
+                        map = serverInformation[c].currentMap;
+                        nextMap = serverInformation[c].nextMap;
                     }
                 }
             } catch (Exception e) {

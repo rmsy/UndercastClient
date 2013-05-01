@@ -100,6 +100,10 @@ public class AresChatHandler {
             if(mod_Ares.CONFIG.matchOnServerJoin && !AresData.server.equalsIgnoreCase("lobby")) {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/match");
             }
+            if(AresData.redirect && AresData.server.equalsIgnoreCase("lobby")) {
+                AresData.redirect = false;
+                Minecraft.getMinecraft().thePlayer.sendChatMessage("/server " + AresData.directionServer);
+            }
         }
         //server detection
         else if(message.contains("Teleporting you to ")) {
