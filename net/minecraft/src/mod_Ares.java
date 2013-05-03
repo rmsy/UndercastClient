@@ -61,41 +61,6 @@ public class mod_Ares extends BaseMod {
         ModLoader.registerKey(this, AresData.keybind, false);
         ModLoader.registerKey(this, AresData.keybind2, false);
         ModLoader.registerKey(this, AresData.keybind3, false);
-
-        //start thread for the main menu button
-        Thread thread = new Thread() {
-            public void run() {
-                while (true) {
-                    //if the main menu is active then add a button
-                    if (mc.currentScreen instanceof GuiMainMenu && mc.currentScreen.buttonList.size() > 0 && CONFIG.showGuiMulti) {
-                        //if you have not added the button already then add it
-                        if (!mainMenuActive) {
-                            //edit the current multiplayer button
-                            GuiButton multi = ((GuiButton) mc.currentScreen.buttonList.get(1));
-                            multi.width = (multi.width / 2) - 1;
-                            mc.currentScreen.buttonList.set(1, multi);
-                            //get values
-                            int y = multi.yPosition;
-                            int x = multi.xPosition + multi.width + 2;
-                            int height = multi.height;
-                            int width = multi.width;
-                            //add the custom ares button
-                            AresMenuButton test = new AresMenuButton(-1, x, y, width, height, "Overcast Network", "Serverlist with Overcast Network Servers");
-                            mc.currentScreen.buttonList.add(test);
-                            mc.currentScreen.updateScreen();
-                            mainMenuActive = true;
-                        }
-                    } else {
-                        mainMenuActive = false;
-                    }
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                    }
-                }
-            }
-        };
-        thread.start();
     }
 
     /**
@@ -254,6 +219,7 @@ public class mod_Ares extends BaseMod {
     public boolean onTickInGUI(float tick, Minecraft mc, GuiScreen screen){
         controlAres.onTickInGUI(tick, mc, screen);
         AresData.update();
+        this.addOvercastButton();
     	return true;
     }
 
@@ -373,6 +339,34 @@ public class mod_Ares extends BaseMod {
             return 0x00FFFF;
         } else {
             return 0x606060;
+        }
+    }
+
+    /**
+     * Adds the Overcast Network button
+     */
+    private void addOvercastButton() {
+        // if the main menu is active then add a button
+        if (mc.currentScreen instanceof GuiMainMenu && mc.currentScreen.buttonList.size() > 0 && CONFIG.showGuiMulti) {
+            //if you have not added the button already then add it
+            if (!mainMenuActive) {
+                //edit the current multiplayer button
+                GuiButton multi = ((GuiButton) mc.currentScreen.buttonList.get(1));
+                multi.width = (multi.width / 2) - 1;
+                mc.currentScreen.buttonList.set(1, multi);
+                //get values
+                int y = multi.yPosition;
+                int x = multi.xPosition + multi.width + 2;
+                int height = multi.height;
+                int width = multi.width;
+                //add the custom ares button
+                AresMenuButton test = new AresMenuButton(-1, x, y, width, height, "Overcast Network", "Serverlist with Overcast Network Servers");
+                mc.currentScreen.buttonList.add(test);
+                mc.currentScreen.updateScreen();
+                mainMenuActive = true;
+            }
+        } else {
+            mainMenuActive = false;
         }
     }
 }
