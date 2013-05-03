@@ -27,7 +27,7 @@ public class AresData {
     public static HashSet<String> friends = new HashSet<String>();
     public static String server;
     public static Teams team;
-    public static boolean isPA;
+    public static boolean isPA = false;
     public static boolean isLobby;
     public static boolean update;
     public static String updateLink;
@@ -39,6 +39,8 @@ public class AresData {
     public static boolean welcomeMessageExpected = true;
     public static boolean redirect = false;
     public static String directionServer;
+    public static int playTimeHours;
+    public static int playTimeMin;
 
     public static boolean guiShowing;
     public static KeyBinding keybind;

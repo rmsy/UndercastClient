@@ -29,6 +29,7 @@ public class mod_Ares extends BaseMod {
     public float brightLevel = (float) 20.0D;
     public float defaultLevel = mc.gameSettings.gammaSetting;
     private ControlsAres controlAres;
+    private PlayTimeCounterThread playTimeCounter;
 
     @Override
     public String getVersion() {
@@ -50,10 +51,10 @@ public class mod_Ares extends BaseMod {
 
         //load variables defaults
         new AresData();
-        
+
         //check for update
         new Ares_UpdaterThread();
-        
+
         //load the new controls menu
         controlAres = new ControlsAres();
 
@@ -142,6 +143,11 @@ public class mod_Ares extends BaseMod {
                 mc.fontRenderer.drawStringWithShadow("Friends Online: \u00A73" + AresData.getFriends(), width, height, 16777215);
                 height += 8;
             }
+            // Playing Time display:
+            if (CONFIG.showPlayingTime) {
+                mc.fontRenderer.drawStringWithShadow(AresCustomMethods.getPlayingTimeString(), width, height, 16777215);
+                height += 8;
+            }
             // Map fetcher:
             if (CONFIG.showMap && !AresData.isLobby) {
                 if (AresData.getMap() != null) {
@@ -220,6 +226,10 @@ public class mod_Ares extends BaseMod {
         controlAres.onTickInGUI(tick, mc, screen);
         AresData.update();
         this.addOvercastButton();
+        // Listen for disconnect, as it isn't properly called
+        if(AresData.isPA && screen instanceof GuiMainMenu) {
+            clientDisconnect(null);
+        }
     	return true;
     }
 
@@ -237,8 +247,8 @@ public class mod_Ares extends BaseMod {
             AresData.guiShowing = true;
             System.out.println("Ares mod activated!");
             AresData.setTeam(AresData.Teams.Observers);
-            AresData.isPA = true;
             AresData.setServer("Lobby");
+            playTimeCounter = new PlayTimeCounterThread();
         } else{
             AresData.isPA=false;
         }
@@ -270,7 +280,7 @@ public class mod_Ares extends BaseMod {
      * Called when client disconnects.
      * Resets all the values
      */
-    public void onDisconnect(NetClientHandler handler) {
+    public void clientDisconnect(NetClientHandler handler) {
         AresData.isPA = false;
         AresData.guiShowing = false;
         AresData.setTeam(AresData.Teams.Observers);
@@ -287,6 +297,8 @@ public class mod_Ares extends BaseMod {
         // for the next connect
         AresData.welcomeMessageExpected = true;
     }
+
+    
 
     /**
      * Called when a key is pressed.

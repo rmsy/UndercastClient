@@ -14,7 +14,7 @@ public class AresConfig {
     private Properties config;
     
     // update this value to change the config version.
-    private static int version = 3;
+    private static int version = 4;
 
     // main variables
     public static boolean showFPS;
@@ -31,6 +31,7 @@ public class AresConfig {
     public static boolean showStreak;
     public static boolean showGuiChat;
     public static boolean showGuiMulti;
+    public static boolean showPlayingTime;
     public static int x;
     public static int y;
     public static boolean toggleTitleScreenButton;
@@ -58,6 +59,7 @@ public class AresConfig {
         defaults.setProperty("showStreak", "true");
         defaults.setProperty("showGuiChat", "true");
         defaults.setProperty("showGuiMulti", "true");
+        defaults.setProperty("showPlayingTime", "false");
         defaults.setProperty("X", "2");
         defaults.setProperty("Y", "2");
         defaults.setProperty("toggleTitleScreenButton", "true");
@@ -129,6 +131,7 @@ public class AresConfig {
             config.setProperty("showStreak", "true");
             config.setProperty("showGuiChat", "true");
             config.setProperty("showGuiMulti", "true");
+            config.setProperty("showPlayingTime", "false");
             config.setProperty("X", "2");
             config.setProperty("Y", "2");
             config.setProperty("toggleTitleScreenButton", "true");
@@ -163,6 +166,7 @@ public class AresConfig {
         showStreak = this.getBoolProperty("showStreak");
         showGuiChat = this.getBoolProperty("showGuiChat");
         showGuiMulti = this.getBoolProperty("showGuiMulti");
+        showPlayingTime = this.getBoolProperty("showPlayingTime");
         x = this.getIntProperty("X");
         y = this.getIntProperty("Y");
         toggleTitleScreenButton = this.getBoolProperty("toggleTitleScreenButton");
@@ -273,6 +277,10 @@ public class AresConfig {
                     config.setProperty("enableButtonTooltips", "true");
                 }
             case 3:
+                if(showPlayingTime == false) {
+                    config.setProperty("showPlayingTime", "false");
+                }
+            case 4:
                 // for the next version.
             }
             config.setProperty("configVersion", ""+version);
