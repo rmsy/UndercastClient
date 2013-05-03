@@ -7,7 +7,6 @@ package tc.oc.server;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import tc.oc.AresData;
-import tc.oc.AresGuiListener;
 import tc.oc.GuiButtonTooltip;
 
 import java.awt.*;
