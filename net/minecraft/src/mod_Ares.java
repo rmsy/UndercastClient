@@ -323,25 +323,26 @@ public class mod_Ares extends BaseMod {
      * @return hex value of team color
      */
     public int getTeamColors() {
-        if (AresData.getTeam() == AresData.Teams.Red) {
+        switch(AresData.getTeam()) {
+        case Red:
             return 0x990000;
-        } else if (AresData.getTeam() == AresData.Teams.Blue) {
+        case Blue:
             return 0x0033FF;
-        } else if (AresData.getTeam() == AresData.Teams.Purple) {
+        case Purple:
             return 0x9933CC;
-        } else if (AresData.getTeam() == AresData.Teams.Cyan) {
+        case Cyan:
             return 0x00FFFF;
-        } else if (AresData.getTeam() == AresData.Teams.Lime) {
+        case Lime:
             return 0x00FF00;
-        } else if (AresData.getTeam() == AresData.Teams.Yellow) {
+        case Yellow:
             return 0xFFFF00;
-        } else if (AresData.getTeam() == AresData.Teams.Green) {
+        case Green:
             return 0x006600;
-        } else if (AresData.getTeam() == AresData.Teams.Orange) {
+        case Orange:
             return 0xFF9900;
-        } else if (AresData.getTeam() == AresData.Teams.Observers) {
+        case Observers:
             return 0x00FFFF;
-        } else {
+        default:
             return 0x606060;
         }
     }
