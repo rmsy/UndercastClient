@@ -44,6 +44,11 @@ public class AresChatHandler {
                 AresData.reload();
             }
         }
+        //if you die
+        else if (message.startsWith(username)) {
+            AresData.addDeaths(1);
+            AresData.resetKillstreak();
+        }
         //if you die from someone
         else if (message.startsWith(username) && (message.contains(" by ") || message.contains(" took "))) {
             AresData.addKilled(1);
@@ -56,11 +61,6 @@ public class AresChatHandler {
         }
         //when you join a match
         else if (message.contains("You joined the")) {
-            AresData.resetKills();
-            AresData.resetKilled();
-            AresData.resetDeaths();
-            AresData.resetKillstreak();
-            AresData.resetLargestKillstreak();
             
             try {
                 AresData.setTeam(AresData.Teams.valueOf(message.replace("You joined the ", "").replace(" Team", "").replace(" team", "")));
@@ -68,7 +68,6 @@ public class AresChatHandler {
                 // if the team set fails because of an alias, set the team to Unknown
                 AresData.setTeam(AresData.Teams.Unknown);
             }
-
         }
         //when a map is done. Display all the stats
         else if (!message.startsWith("<") && message.toLowerCase().contains("cycling to") && message.contains("1 second")) {

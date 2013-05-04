@@ -22,7 +22,6 @@ public class mod_Ares extends BaseMod {
     public final static String MOD_VERSION = "1.5.1";
     protected String username = "Not_Found";
     protected Minecraft mc = Minecraft.getMinecraft();
-    private boolean deathScreenActive;
     private boolean mainMenuActive;
     public static AresConfig CONFIG;
     public static boolean brightActive;
@@ -94,11 +93,6 @@ public class mod_Ares extends BaseMod {
         //if it is the first time it is active count a death
         //if it is not don't do anything
         if (mc.currentScreen instanceof GuiGameOver) {
-            if (!deathScreenActive) {
-                AresData.addDeaths(1);
-                AresData.resetKillstreak();
-                deathScreenActive = true;
-            }
             //get the title screen button
             GuiButton titleScreen = (GuiButton) mc.currentScreen.buttonList.get(1);
             //if the button is enabled and the user wants to disable it
@@ -107,8 +101,6 @@ public class mod_Ares extends BaseMod {
                 mc.currentScreen.buttonList.set(1, titleScreen);
                 mc.currentScreen.updateScreen();
             }
-        } else {
-            deathScreenActive = false;
         }
 
         //get debug info for the fps
