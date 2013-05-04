@@ -34,6 +34,7 @@ public class AresData {
     private static InformationLoaderThread mapLoader;
     private static boolean mapLoaderFinished;
     public static AresServer[] serverInformation;
+    public static AresServer[] sortedServerInformation;
     public static int serverCount;
     // if it's true, the /server comand isn't executed after a "Welcome to Project Ares" message
     public static boolean welcomeMessageExpected = true;
@@ -41,6 +42,7 @@ public class AresData {
     public static String directionServer;
     public static int playTimeHours;
     public static int playTimeMin;
+    public static int sortIndex;
 
     public static boolean guiShowing;
     public static KeyBinding keybind;
@@ -50,6 +52,7 @@ public class AresData {
     public static enum Teams {Red, Blue, Purple, Cyan, Lime, Yellow, Green, Orange, Observers, Unknown};
     public static enum MatchState {Starting, Started, Finished, Waiting, Lobby, Unknown};
     public static enum ServerType {Lobby, Blitz, ProjectAres, Unknown};
+    public static String[] sortNames = {"Web","Match","Players","Abc"};
 
     public AresData() {
         update=true;
@@ -69,6 +72,11 @@ public class AresData {
         for(int c = 0;c < serverInformation.length; c++) {
             serverInformation[c] = new AresServer();
         }
+        sortedServerInformation = new AresServer[20];
+        for(int c = 0;c < sortedServerInformation.length; c++) {
+            sortedServerInformation[c] = new AresServer();
+        }
+        sortIndex = 0;
         try {
             mapLoader = new InformationLoaderThread(new URL("https://oc.tc/play"));
         } catch(Exception e) {
@@ -107,6 +115,8 @@ public class AresData {
                         nextMap = serverInformation[c].nextMap;
                     }
                 }
+                
+                AresCustomMethods.sortServers();
             } catch (Exception e) {
                 System.out.println("[ProjectAres]: Failed to parse maps");
                 System.out.println("[ProjectAres]: ERROR: " + e.toString());
