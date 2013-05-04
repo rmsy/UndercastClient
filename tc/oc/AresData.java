@@ -49,7 +49,7 @@ public class AresData {
     public static KeyBinding keybind2;
     public static KeyBinding keybind3;
 
-    public static enum Teams {Red, Blue, Purple, Cyan, Lime, Yellow, Green, Orange, Observers, Unknown};
+    public static enum Teams {Red, Blue, Purple, Cyan, Lime, Yellow, Green, Orange, Observers, Unknown, Cot, Bot};
     public static enum MatchState {Starting, Started, Finished, Waiting, Lobby, Unknown};
     public static enum ServerType {Lobby, Blitz, ProjectAres, Unknown};
     public static String[] sortNames = {"Web","Match","Players","Abc"};
