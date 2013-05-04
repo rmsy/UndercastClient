@@ -43,6 +43,7 @@ public class AresData {
     public static int playTimeHours;
     public static int playTimeMin;
     public static int sortIndex;
+    public static boolean isGameOver = false;
 
     public static boolean guiShowing;
     public static KeyBinding keybind;

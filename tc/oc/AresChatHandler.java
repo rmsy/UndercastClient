@@ -112,6 +112,10 @@ public class AresChatHandler {
         } else if(message.contains("You are currently on ")) {
             AresData.setServer(message.replace("You are currently on ", ""));
             AresCustomMethods.handleServerSwap();
+        } else if(message.toLowerCase().contains("game over")) {
+            AresData.isGameOver = true;
+        } else if(message.toLowerCase().contains("the match has started")) {
+            AresData.isGameOver = false;
         }
     }
 }

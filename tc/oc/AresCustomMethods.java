@@ -86,6 +86,7 @@ public class AresCustomMethods {
         AresData.resetKilled();
         AresData.resetKillstreak();
         AresData.resetLargestKillstreak();
+        AresData.isGameOver = false;
     }
 
     /**
