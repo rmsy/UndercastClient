@@ -75,7 +75,7 @@ public class mod_Ares extends BaseMod {
             username = mc.thePlayer.username;
             String message = StringUtils.stripControlCodes(var1);
             // stop global msg to go through
-            if(!message.startsWith("<")) {
+            if(!message.startsWith("<") && AresData.isPA) {
                 new AresChatHandler(message, username, player);
             }
         } catch(Exception e) {
