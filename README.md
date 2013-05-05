@@ -34,7 +34,7 @@ __Installing__
     * Open your minecraft.jar
     * Delete Meta-inf file that contain the word, "mojang."
     * Drag all Minecraft forge files into the jar.
-    * Drag all files from the Unoffial Project Ares Mod ZIP into the jar.
+    * Drag all files from the Unoffial Overcast Network Mod ZIP into the jar.
     * Start Minecraft!
 * Installing with Modloader:
     * Download Modloader.
@@ -42,8 +42,8 @@ __Installing__
     * Open your minecraft.jar.
     * Delete all Meta-inf files.
     * Drag all Modloader files into the jar.
-    * Drag all files from the Unofficial Project Ares Mod ZIP into the jar.
-    * Start Minecraft!
+    * Start Minecraft.
+    * In your .minecraft, a mods folder was createad, drag the Overcast Mod ZIP into that folder.
          
 * * *
 
