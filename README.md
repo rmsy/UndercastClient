@@ -1,4 +1,4 @@
-#Unoffical Overcast Network Client Mod
+#Undercast Mod (Unofficial Client Mod for the Overcast Network)
 ### Created by the community for the community
 * * *
 This is a client side mod that is made to enhance your experience on the Overcast Network servers. We have already included great features and look forward to adding many more. Above all we try our best to take what the community wants and make it happen. This is a community made mod and will continue to be so. Feel free to express any and all opinions on it and/or ideas on how to make it better.
@@ -9,7 +9,7 @@ __Current features__
     * KD Ration
     * Kill Streak
     * Max Kill Streak
-* Custom server menu
+* Custom Server menu
 * Custom Ingame menu
 * High customization to your taste
 * Observer full bright mode
@@ -17,7 +17,7 @@ __Current features__
 * FPS ingame display
 * Disabled Title Menu Button on death screen
 * Option to filter "tips" messages
-* Map name
+* Shows the current and the next Map
 * Team detection
 * and much more!
  
@@ -34,16 +34,16 @@ __Installing__
     * Open your minecraft.jar
     * Delete Meta-inf file that contain the word, "mojang."
     * Drag all Minecraft forge files into the jar.
-    * Drag all files from the Unoffial Overcast Network Mod ZIP into the jar.
+    * Drag all files from the Undercast Mod ZIP into the jar.
     * Start Minecraft!
 * Installing with Modloader:
     * Download Modloader.
-    * Open downloaded ZOP.
+    * Open downloaded ZIP.
     * Open your minecraft.jar.
     * Delete all Meta-inf files.
     * Drag all Modloader files into the jar.
     * Start Minecraft.
-    * In your .minecraft, a mods folder was createad, drag the Overcast Mod ZIP into that folder.
+    * In your .minecraft, a mods folder was createad, drag the Undercast Mod ZIP into that folder.
          
 * * *
 
