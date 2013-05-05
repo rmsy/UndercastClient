@@ -232,7 +232,7 @@ public class mod_Ares extends BaseMod {
     public void clientConnect(NetClientHandler var1) {
         AresData.setTeam(AresData.Teams.Observers); 
         //if logging onto a project ares server, then enable the main mod
-        if (var1.getNetManager().getSocketAddress().toString().contains("us.oc.tc")) {
+        if (var1.getNetManager().getSocketAddress().toString().contains(".oc.tc")) {
             // What happens if logs into project ares
             AresData.isPA = true;
             AresData.isLobby = true;
