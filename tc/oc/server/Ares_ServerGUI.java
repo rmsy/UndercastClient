@@ -89,7 +89,7 @@ public class Ares_ServerGUI extends GuiScreen {
             AresCustomMethods.sortServers();
         }
         if(guibutton.id == 5) {
-            if(inGame) {
+            if(inGame && AresData.isPlayingAres()) {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/server lobby");
             } else {
                 ServerData joinServer = new ServerData("us.oc.tc", "us.oc.tc:25565");
@@ -138,7 +138,7 @@ public class Ares_ServerGUI extends GuiScreen {
      */
     public void joinSelectedServer() {
         if(selected != -1) {
-            if(inGame) {
+            if(inGame && AresData.isPlayingAres()) {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/server " + AresData.sortedServerInformation[selected].name);
             } else {
                 AresData.redirect = true;
