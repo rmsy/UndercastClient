@@ -91,12 +91,15 @@ public class AresChatHandler {
         }
         //sends /match when you join a server.
         else if(message.contains("Welcome to")){
+         // if the server name isn't known, it can't be the lobby (because you can't join the lobby without using /server
+            boolean passThrough = false; 
             if(!AresData.welcomeMessageExpected) {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/server");
+                passThrough = true; //send /server although the server is currently lobby
             } else {
                 AresData.welcomeMessageExpected = false;
             }
-            if(mod_Ares.CONFIG.matchOnServerJoin && !AresData.server.equalsIgnoreCase("lobby")) {
+            if(mod_Ares.CONFIG.matchOnServerJoin && (!AresData.server.equalsIgnoreCase("lobby") || passThrough)) {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/match");
             }
             if(AresData.redirect && AresData.server.equalsIgnoreCase("lobby")) {

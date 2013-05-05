@@ -10,6 +10,7 @@ The changelog exists since version 1.4.0
  - color tweaks for cyan and green team
  - better performance
  - server gui connects to us.oc.tc when you use it from a not-oc.tc server
+ - minor bug fixes
 
 1.5.1
  - updated for 1.5.2
