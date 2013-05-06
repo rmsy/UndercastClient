@@ -91,13 +91,15 @@ public class AresChatHandler {
         }
         //sends /match when you join a server.
         else if(message.contains("Welcome to")){
+         // if the server name isn't known, it can't be the lobby (because you can't join the lobby without using /server
+            boolean passThrough = false; 
             if(!AresData.welcomeMessageExpected) {
-                AresData.setServer(message.replace("Welcome to ", ""));
-                AresCustomMethods.handleServerSwap();
+                Minecraft.getMinecraft().thePlayer.sendChatMessage("/server");
+                passThrough = true; //send /server although the server is currently lobby
             } else {
                 AresData.welcomeMessageExpected = false;
             }
-            if(mod_Ares.CONFIG.matchOnServerJoin && (!AresData.server.equalsIgnoreCase("lobby"))) {
+            if(mod_Ares.CONFIG.matchOnServerJoin && (!AresData.server.equalsIgnoreCase("lobby") || passThrough)) {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/match");
             }
             if(AresData.redirect && AresData.server.equalsIgnoreCase("lobby")) {
@@ -109,6 +111,9 @@ public class AresChatHandler {
         else if(message.contains("Teleporting you to ")) {
             AresData.setServer(message.replace("Teleporting you to ", ""));
             AresData.welcomeMessageExpected = true;
+            AresCustomMethods.handleServerSwap();
+        } else if(message.contains("You are currently on ")) {
+            AresData.setServer(message.replace("You are currently on ", ""));
             AresCustomMethods.handleServerSwap();
         } else if(message.toLowerCase().contains("game over")) {
             AresData.isGameOver = true;
