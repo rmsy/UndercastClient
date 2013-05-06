@@ -287,7 +287,7 @@ public class mod_Ares extends BaseMod {
             mc.gameSettings.gammaSetting=defaultLevel;
         }
         // for the next connect
-        AresData.welcomeMessageExpected = true;
+        AresData.welcomeMessageExpected = false;
     }
 
     

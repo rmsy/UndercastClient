@@ -37,7 +37,7 @@ public class AresData {
     public static AresServer[] sortedServerInformation;
     public static int serverCount;
     // if it's true, the /server comand isn't executed after a "Welcome to Project Ares" message
-    public static boolean welcomeMessageExpected = true;
+    public static boolean welcomeMessageExpected = false;
     public static boolean redirect = false;
     public static String directionServer;
     public static int playTimeHours;

@@ -90,18 +90,7 @@ public class AresChatHandler {
             Minecraft.getMinecraft().ingameGUI.getChatGUI().deleteChatLine(0);
         }
         //sends /match when you join a server.
-        else if(message.contains("Welcome to")){
-         // if the server name isn't known, it can't be the lobby (because you can't join the lobby without using /server
-            boolean passThrough = false; 
-            if(!AresData.welcomeMessageExpected) {
-                Minecraft.getMinecraft().thePlayer.sendChatMessage("/server");
-                passThrough = true; //send /server although the server is currently lobby
-            } else {
-                AresData.welcomeMessageExpected = false;
-            }
-            if(mod_Ares.CONFIG.matchOnServerJoin && (!AresData.server.equalsIgnoreCase("lobby") || passThrough)) {
-                Minecraft.getMinecraft().thePlayer.sendChatMessage("/match");
-            }
+        else if(message.contains("Welcome to the Overcast Network")){
             if(AresData.redirect && AresData.server.equalsIgnoreCase("lobby")) {
                 AresData.redirect = false;
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/server " + AresData.directionServer);
@@ -110,7 +99,9 @@ public class AresChatHandler {
         //server detection
         else if(message.contains("Teleporting you to ")) {
             AresData.setServer(message.replace("Teleporting you to ", ""));
-            AresData.welcomeMessageExpected = true;
+            if(!message.toLowerCase().contains("lobby")) {
+                AresData.welcomeMessageExpected = true;
+            }
             AresCustomMethods.handleServerSwap();
         } else if(message.contains("You are currently on ")) {
             AresData.setServer(message.replace("You are currently on ", ""));
@@ -119,6 +110,15 @@ public class AresChatHandler {
             AresData.isGameOver = true;
         } else if(message.toLowerCase().contains("the match has started")) {
             AresData.isGameOver = false;
+        } else if(message.equals("                    ")) {
+            if(!AresData.welcomeMessageExpected) {
+                Minecraft.getMinecraft().thePlayer.sendChatMessage("/server");
+            } else {
+                AresData.welcomeMessageExpected = false;
+            }
+            if(mod_Ares.CONFIG.matchOnServerJoin) {
+                Minecraft.getMinecraft().thePlayer.sendChatMessage("/match");
+            }
         }
     }
 }
