@@ -43,7 +43,7 @@ __Installing__
     * Delete all Meta-inf files.
     * Drag all Modloader files into the jar.
     * Start Minecraft.
-    * In your .minecraft, a mods folder was createad, drag the Undercast Mod ZIP into that folder.
+    * In your .minecraft, a mods folder was created, drag the Undercast Mod ZIP into that folder.
          
 * * *
 
