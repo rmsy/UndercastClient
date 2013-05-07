@@ -48,8 +48,8 @@ __Installing__
 * * *
 
 __Reporting Bugs__
-* Before submitting a bug report make sure it is not already reported [here.](https://github.com/UnofficalProjectAresTeam/mod_Ares/issues/)
-* Create a bug report [here.](https://github.com/UnofficalProjectAresTeam/mod_Ares/issues/new)
+* Before submitting a bug report make sure it is not already reported [here.](https://github.com/UndercastTeam/UndercastClient/issues/)
+* Create a bug report [here.](https://github.com/UndercastTeam/UndercastClient/issues/new)
 * Do:
     * Include ways bug can be reproduced.
     * Include a crash report if present.
