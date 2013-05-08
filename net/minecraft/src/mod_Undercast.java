@@ -11,6 +11,7 @@ import tc.oc.update.*;
 import tc.oc.internetTools.*;
 import undercast.client.controls.*;
 import undercast.client.server.*;
+import undercast.client.update.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -58,7 +59,7 @@ public class mod_Undercast extends BaseMod {
         new AresData();
 
         //check for update
-        new Ares_UpdaterThread();
+        new UndercastUpdaterThread();
 
         //load the new controls menu
         undercastControls = new UndercastControls();
@@ -258,7 +259,7 @@ public class mod_Undercast extends BaseMod {
                         Thread.sleep(3000);
                         for(int c = 0; c < 10; c++) { // don't wait longer than 10 sec
                             Thread.sleep(1000);
-                            if(Ares_UpdaterThread.finished) {
+                            if(UndercastUpdaterThread.finished) {
                                 break;
                             }
                         }

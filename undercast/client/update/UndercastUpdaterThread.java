@@ -1,4 +1,4 @@
-package tc.oc.update;
+package undercast.client.update;
 //You may not release this source under any condition, it must be linked to this page
 //You may recompile and publish as long as skipperguy12 and Guru_Fraser are given credit
 //You may not claim this to be your own
@@ -13,11 +13,11 @@ import tc.oc.AresData;
 import net.minecraft.src.mod_Undercast;
 import net.minecraft.src.mod_Undercast;
 
-public class Ares_UpdaterThread extends Thread{
+public class UndercastUpdaterThread extends Thread{
     boolean errorOccured;
     public static boolean finished = false;
     
-    public Ares_UpdaterThread(){
+    public UndercastUpdaterThread(){
         errorOccured = false;
         try {
             start();
