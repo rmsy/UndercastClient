@@ -26,7 +26,7 @@ public class UndercastData {
     public static HashSet<String> friends = new HashSet<String>();
     public static String server;
     public static Teams team;
-    public static boolean isPA = false;
+    public static boolean isOC = false;
     public static boolean isLobby;
     public static boolean update;
     public static String updateLink;
@@ -216,8 +216,8 @@ public class UndercastData {
         return friends.contains(s);
     }
 
-    public static boolean isPlayingAres() {
-        return isPA;
+    public static boolean isPlayingOvercast() {
+        return isOC;
     }
 
     public static Teams getTeam() {

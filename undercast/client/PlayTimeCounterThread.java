@@ -19,7 +19,7 @@ public class PlayTimeCounterThread extends Thread {
         while (true) {
             try {
                 Thread.sleep(60000);
-                if(!UndercastData.isPA) {
+                if(!UndercastData.isOC) {
                     return;
                 }
                 UndercastData.playTimeMin += 1;

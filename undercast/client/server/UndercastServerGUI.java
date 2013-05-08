@@ -87,7 +87,7 @@ public class UndercastServerGUI extends GuiScreen {
             UndercastCustomMethods.sortServers();
         }
         if(guibutton.id == 5) {
-            if(inGame && UndercastData.isPlayingAres()) {
+            if(inGame && UndercastData.isPlayingOvercast()) {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/server lobby");
             } else {
                 ServerData joinServer = new ServerData("us.oc.tc", "us.oc.tc:25565");
@@ -136,7 +136,7 @@ public class UndercastServerGUI extends GuiScreen {
      */
     public void joinSelectedServer() {
         if(selected != -1) {
-            if(inGame && UndercastData.isPlayingAres()) {
+            if(inGame && UndercastData.isPlayingOvercast()) {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/server " + UndercastData.sortedServerInformation[selected].name);
             } else {
                 UndercastData.redirect = true;

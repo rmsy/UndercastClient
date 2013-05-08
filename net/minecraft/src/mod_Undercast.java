@@ -80,7 +80,7 @@ public class mod_Undercast extends BaseMod {
             username = mc.thePlayer.username;
             String message = StringUtils.stripControlCodes(var1);
             // stop global msg to go through
-            if(!message.startsWith("<") && UndercastData.isPA) {
+            if(!message.startsWith("<") && UndercastData.isOC) {
                 new UndercastChatHandler(message, username, player);
             }
         } catch(Exception e) {
@@ -123,7 +123,7 @@ public class mod_Undercast extends BaseMod {
         }
         //if on Ares server then display this info.
         //if chat is open and config says yes then show gui
-        if (UndercastData.isPlayingAres() && UndercastData.guiShowing && (mc.inGameHasFocus || CONFIG.showGuiChat && mc.currentScreen instanceof GuiChat)) {
+        if (UndercastData.isPlayingOvercast() && UndercastData.guiShowing && (mc.inGameHasFocus || CONFIG.showGuiChat && mc.currentScreen instanceof GuiChat)) {
             // Server display
             if (CONFIG.showServer) {
                 mc.fontRenderer.drawStringWithShadow("Server: \u00A76" + UndercastData.getServer(), width, height, 16777215);
@@ -194,7 +194,7 @@ public class mod_Undercast extends BaseMod {
         }
         
         //if you not on obs turn it off
-        if((UndercastData.team != Teams.Observers && !UndercastData.isGameOver) || !UndercastData.isPA){
+        if((UndercastData.team != Teams.Observers && !UndercastData.isGameOver) || !UndercastData.isOC){
             brightActive=false;
             //if full bright is on turn it off
             if(mc.gameSettings.gammaSetting>=brightLevel){
@@ -207,7 +207,7 @@ public class mod_Undercast extends BaseMod {
         }
         
         //gui display for obs if you have brightness
-        if(UndercastData.isPlayingAres() && UndercastData.guiShowing && (mc.inGameHasFocus || CONFIG.showGuiChat && mc.currentScreen instanceof GuiChat)){
+        if(UndercastData.isPlayingOvercast() && UndercastData.guiShowing && (mc.inGameHasFocus || CONFIG.showGuiChat && mc.currentScreen instanceof GuiChat)){
             if(brightActive && CONFIG.fullBright && (UndercastData.team == Teams.Observers || UndercastData.isGameOver)){
                 mc.fontRenderer.drawStringWithShadow("Full Bright: \u00A72ON", width, height, 16777215);
                  height += 8;
@@ -224,7 +224,7 @@ public class mod_Undercast extends BaseMod {
         UndercastData.update();
         this.addOvercastButton();
         // Listen for disconnect, as it isn't properly called
-        if(UndercastData.isPA && screen instanceof GuiMainMenu) {
+        if(UndercastData.isOC && screen instanceof GuiMainMenu) {
             clientDisconnect(null);
         }
     	return true;
@@ -239,7 +239,7 @@ public class mod_Undercast extends BaseMod {
         //if logging onto a overcast network server, then enable the main mod
         if (var1.getNetManager().getSocketAddress().toString().contains(".oc.tc")) {
             // What happens if logs into project ares
-            UndercastData.isPA = true;
+            UndercastData.isOC = true;
             UndercastData.isLobby = true;
             UndercastData.guiShowing = true;
             System.out.println("[UndercastMod] Joined Overcast Network - Mod activated!");
@@ -247,7 +247,7 @@ public class mod_Undercast extends BaseMod {
             UndercastData.setServer("Lobby");
             playTimeCounter = new PlayTimeCounterThread();
         } else{
-            UndercastData.isPA=false;
+            UndercastData.isOC=false;
         }
         //update notifier
         if(!UndercastData.isUpdate()){
@@ -278,7 +278,7 @@ public class mod_Undercast extends BaseMod {
      * Resets all the values
      */
     public void clientDisconnect(NetClientHandler handler) {
-        UndercastData.isPA = false;
+        UndercastData.isOC = false;
         UndercastData.guiShowing = false;
         UndercastData.setTeam(UndercastData.Teams.Observers);
         UndercastData.resetKills();
@@ -309,7 +309,7 @@ public class mod_Undercast extends BaseMod {
                 ModLoader.openGUI(mc.thePlayer, new UndercastServerGUI(true));
             }
             //if you are an obs;have the config to true; toggle fullbright and play sound
-            else if(UndercastData.isPlayingAres() && keybinding == UndercastData.keybind3 && (UndercastData.team == Teams.Observers || UndercastData.isGameOver) && CONFIG.fullBright){
+            else if(UndercastData.isPlayingOvercast() && keybinding == UndercastData.keybind3 && (UndercastData.team == Teams.Observers || UndercastData.isGameOver) && CONFIG.fullBright){
                 if(mc.inGameHasFocus){
                     brightActive = !brightActive;
                     if(brightActive)
