@@ -22,13 +22,13 @@ public class mod_Undercast extends BaseMod {
     public final static String MOD_NAME = "UndercastMod";
     protected String username = "Not_Found";
     protected Minecraft mc = Minecraft.getMinecraft();
-    private boolean mainMenuActive;
     public static UndercastConfig CONFIG;
     public static boolean brightActive;
     public float brightLevel = (float) 20.0D;
     public float defaultLevel = mc.gameSettings.gammaSetting;
     private UndercastControls undercastControls;
     private PlayTimeCounterThread playTimeCounter;
+    private int buttonListSize;
 
     @Override
     public String getVersion() {
@@ -359,8 +359,8 @@ public class mod_Undercast extends BaseMod {
     private void addOvercastButton() {
         // if the main menu is active then add a button
         if (mc.currentScreen instanceof GuiMainMenu && mc.currentScreen.buttonList.size() > 0 && CONFIG.showGuiMulti) {
-            //if you have not added the button already then add it
-            if (!mainMenuActive) {
+            //buttonListSize == 0 means, it hasn't been added once and the second condition checks if the main menu has refreshed
+            if(buttonListSize == 0 || buttonListSize > mc.currentScreen.buttonList.size()) {
                 //edit the current multiplayer button
                 GuiButton multi = ((GuiButton) mc.currentScreen.buttonList.get(1));
                 multi.width = (multi.width / 2) - 1;
@@ -371,13 +371,11 @@ public class mod_Undercast extends BaseMod {
                 int height = multi.height;
                 int width = multi.width;
                 //add the custom ares button
-                UndercastMenuButton test = new UndercastMenuButton(-1, x, y, width, height, "Overcast Network", "Serverlist with Overcast Network Servers");
-                mc.currentScreen.buttonList.add(test);
+                UndercastMenuButton menuButton = new UndercastMenuButton(-1, x, y, width, height, "Overcast Network", "Serverlist with Overcast Network Servers");
+                mc.currentScreen.buttonList.add(menuButton);
                 mc.currentScreen.updateScreen();
-                mainMenuActive = true;
+                buttonListSize = mc.currentScreen.buttonList.size();
             }
-        } else {
-            mainMenuActive = false;
         }
     }
 }
