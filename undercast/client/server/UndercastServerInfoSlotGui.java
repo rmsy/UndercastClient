@@ -2,8 +2,7 @@ package undercast.client.server;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Tessellator;
-import tc.oc.AresData;
-import tc.oc.AresData.ServerType;
+import undercast.client.UndercastData;
 
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ class UndercastServerInfoSlotGui extends UndercastServerSlotGui {
      * Main draw method for the individual server boxes
      */
     protected void drawSlot(int i, int j, int k, int l, Tessellator tessellator) {
-        UndercastServer server = AresData.sortedServerInformation[i];
+        UndercastServer server = UndercastData.sortedServerInformation[i];
 
         parent.drawString(Minecraft.getMinecraft().fontRenderer, getServerName(server), j + 2, k + 1, 16777215);
         int serveNameWidth = Minecraft.getMinecraft().fontRenderer.getStringWidth(getServerName(server));
@@ -41,7 +40,7 @@ class UndercastServerInfoSlotGui extends UndercastServerSlotGui {
     }
 
     protected int getSize() {
-        return AresData.serverCount;
+        return UndercastData.serverCount;
     }
 
     protected boolean isSelected(int i) {

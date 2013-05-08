@@ -1,4 +1,4 @@
-package tc.oc;
+package undercast.client;
 
 import net.minecraft.src.mod_Undercast;
 
@@ -19,13 +19,13 @@ public class PlayTimeCounterThread extends Thread {
         while (true) {
             try {
                 Thread.sleep(60000);
-                if(!AresData.isPA) {
+                if(!UndercastData.isPA) {
                     return;
                 }
-                AresData.playTimeMin += 1;
-                if(AresData.playTimeMin == 60) {
-                    AresData.playTimeHours += 1;
-                    AresData.playTimeMin = 0;
+                UndercastData.playTimeMin += 1;
+                if(UndercastData.playTimeMin == 60) {
+                    UndercastData.playTimeHours += 1;
+                    UndercastData.playTimeMin = 0;
                 }
             } catch (Exception ignored) {
             }

@@ -2,7 +2,6 @@ package undercast.client.controls;
 
 import org.lwjgl.input.Keyboard;
 
-import tc.oc.AresData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 

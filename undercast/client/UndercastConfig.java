@@ -1,4 +1,4 @@
-package tc.oc;
+package undercast.client;
 
 import net.minecraft.src.ModLoader;
 
@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 import java.util.Properties;
 
 
-public class AresConfig {
+public class UndercastConfig {
     private static Properties defaults = new Properties();
     private static String CONFIG_PATH;
     private Properties config;
@@ -77,7 +77,7 @@ public class AresConfig {
         defaults.setProperty("configVersion", "0");
     }
 
-    public AresConfig() {
+    public UndercastConfig() {
         System.out.println("[UndercastMod]: Attempting to load/create the configuration.");
         loadConfig();
         loadConfigData();

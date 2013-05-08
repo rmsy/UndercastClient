@@ -1,4 +1,4 @@
-package tc.oc;
+package undercast.client;
 //You may not release this source under any condition, it must be linked to this page
 //You may recompile and publish as long as skipperguy12 and Guru_Fraser are given credit
 //You may not claim this to be your own
@@ -14,7 +14,7 @@ import undercast.client.server.UndercastServer;
 import java.net.URL;
 import java.util.HashSet;
 
-public class AresData {
+public class UndercastData {
     //Data Varibles
     public static String map;
     public static String nextMap;
@@ -54,7 +54,7 @@ public class AresData {
     public static enum ServerType {Lobby, Blitz, ProjectAres, Unknown};
     public static String[] sortNames = {"Web","Match","Players","Abc"};
 
-    public AresData() {
+    public UndercastData() {
         update=true;
         setMap("Fetching...");
         resetKills();
@@ -116,7 +116,7 @@ public class AresData {
                     }
                 }
                 
-                AresCustomMethods.sortServers();
+                UndercastCustomMethods.sortServers();
             } catch (Exception e) {
                 System.out.println("[UndercastMod]: Failed to parse maps");
                 System.out.println("[UndercastMod]: ERROR: " + e.toString());
@@ -254,7 +254,7 @@ public class AresData {
     }
 
     public static void setUpdate(boolean update) {
-        AresData.update = update;
+        UndercastData.update = update;
     }
 
     public static String getUpdateLink() {
@@ -262,6 +262,6 @@ public class AresData {
     }
 
     public static void setUpdateLink(String updateLink) {
-        AresData.updateLink = updateLink;
+        UndercastData.updateLink = updateLink;
     }
 }

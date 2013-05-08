@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-import tc.oc.AresData;
+import undercast.client.UndercastData;
 
 import net.minecraft.src.mod_Undercast;
 import net.minecraft.src.mod_Undercast;
@@ -38,15 +38,15 @@ public class UndercastUpdaterThread extends Thread{
             readline = in.readLine();
             readline2 = in.readLine();
         } catch (Exception e) {
-            AresData.setUpdate(false);
-            AresData.setUpdateLink("Could not get update information.");
+            UndercastData.setUpdate(false);
+            UndercastData.setUpdateLink("Could not get update information.");
         }
         if(!mod_Undercast.MOD_VERSION.contains("dev") && compareVersions(readline)){
-            AresData.setUpdate(false);
+            UndercastData.setUpdate(false);
             if(!errorOccured) {
-                AresData.setUpdateLink(readline2);
+                UndercastData.setUpdateLink(readline2);
             } else {
-                AresData.setUpdateLink("An unknown error occured while getting the update information.");
+                UndercastData.setUpdateLink("An unknown error occured while getting the update information.");
             }
         }
         finished = true;
