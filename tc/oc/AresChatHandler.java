@@ -7,7 +7,7 @@ package tc.oc;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.mod_Ares;
+import net.minecraft.src.mod_Undercast;
 
 public class AresChatHandler {
     public AresChatHandler(String message, String username, EntityPlayer player) {
@@ -86,7 +86,7 @@ public class AresChatHandler {
             AresData.setTeam(AresData.Teams.Observers);
         }
         //filters [Tip] messages
-        else if (message.startsWith("[Tip]") && mod_Ares.CONFIG.filterTips) {
+        else if (message.startsWith("[Tip]") && mod_Undercast.CONFIG.filterTips) {
             Minecraft.getMinecraft().ingameGUI.getChatGUI().deleteChatLine(0);
         }
         //sends /match when you join a server.
@@ -116,7 +116,7 @@ public class AresChatHandler {
             } else {
                 AresData.welcomeMessageExpected = false;
             }
-            if(mod_Ares.CONFIG.matchOnServerJoin) {
+            if(mod_Undercast.CONFIG.matchOnServerJoin) {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/match");
             }
         }

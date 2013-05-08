@@ -1,12 +1,12 @@
 package tc.oc;
 
-import net.minecraft.src.mod_Ares;
+import net.minecraft.src.mod_Undercast;
 
 public class PlayTimeCounterThread extends Thread {
     public PlayTimeCounterThread() {
         try {
             // only start the Thread if the playing time is used
-            if(mod_Ares.CONFIG.showPlayingTime) {
+            if(mod_Undercast.CONFIG.showPlayingTime) {
                 this.start();
             }
         } catch (Exception e) {

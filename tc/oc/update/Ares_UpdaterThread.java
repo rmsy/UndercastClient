@@ -10,7 +10,8 @@ import java.net.URL;
 
 import tc.oc.AresData;
 
-import net.minecraft.src.mod_Ares;
+import net.minecraft.src.mod_Undercast;
+import net.minecraft.src.mod_Undercast;
 
 public class Ares_UpdaterThread extends Thread{
     boolean errorOccured;
@@ -40,7 +41,7 @@ public class Ares_UpdaterThread extends Thread{
             AresData.setUpdate(false);
             AresData.setUpdateLink("Could not get update information.");
         }
-        if(!mod_Ares.MOD_VERSION.contains("dev") && compareVersions(readline)){
+        if(!mod_Undercast.MOD_VERSION.contains("dev") && compareVersions(readline)){
             AresData.setUpdate(false);
             if(!errorOccured) {
                 AresData.setUpdateLink(readline2);
@@ -56,12 +57,12 @@ public class Ares_UpdaterThread extends Thread{
      */
     private boolean compareVersions(String internetVersion) {
         try {
-            String debug[] = mod_Ares.MOD_VERSION.split("[.]");
-            int majorVersionMod = Integer.parseInt(mod_Ares.MOD_VERSION.split("[.]")[0]);;
+            String debug[] = mod_Undercast.MOD_VERSION.split("[.]");
+            int majorVersionMod = Integer.parseInt(mod_Undercast.MOD_VERSION.split("[.]")[0]);;
             int majorVersionLatest = Integer.parseInt(internetVersion.split("[.]")[0]);
-            int minorVersionMod = Integer.parseInt(mod_Ares.MOD_VERSION.split("[.]")[1]);;
+            int minorVersionMod = Integer.parseInt(mod_Undercast.MOD_VERSION.split("[.]")[1]);;
             int minorVersionLatest = Integer.parseInt(internetVersion.split("[.]")[1]);
-            int revisionMod = Integer.parseInt(mod_Ares.MOD_VERSION.split("[.]")[2]);;
+            int revisionMod = Integer.parseInt(mod_Undercast.MOD_VERSION.split("[.]")[2]);;
             int revisionLatest = Integer.parseInt(internetVersion.split("[.]")[2]);;
             
             if (majorVersionMod < majorVersionLatest) {

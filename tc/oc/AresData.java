@@ -5,7 +5,6 @@ package tc.oc;
 //You may not remove these comments
 
 import net.minecraft.src.KeyBinding;
-import net.minecraft.src.mod_Ares;
 import org.lwjgl.input.Keyboard;
 
 import tc.oc.internetTools.InformationLoaderThread;

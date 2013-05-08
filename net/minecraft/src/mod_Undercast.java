@@ -18,7 +18,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-public class mod_Ares extends BaseMod {
+public class mod_Undercast extends BaseMod {
     public final static String MOD_VERSION = "1.5.2";
     public final static String MOD_NAME = "UndercastMod";
     protected String username = "Not_Found";
