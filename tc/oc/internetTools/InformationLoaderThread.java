@@ -27,8 +27,8 @@ public class InformationLoaderThread extends Thread {
         try {
             start();
         } catch(Exception e) {
-            System.out.println("[ProjectAres]: Failed to load maps");
-            System.out.println("[ProjectAres]: ERROR: " + e.toString());
+            System.out.println("[UndercastMod]: Failed to load maps");
+            System.out.println("[UndercastMod]: ERROR: " + e.toString());
         }
     }
     public void run() {

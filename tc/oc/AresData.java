@@ -81,8 +81,8 @@ public class AresData {
         try {
             mapLoader = new InformationLoaderThread(new URL("https://oc.tc/play"));
         } catch(Exception e) {
-            System.out.println("[ProjectAres]: Failed to load maps");
-            System.out.println("[ProjectAres]: ERROR: " + e.toString());
+            System.out.println("[UndercastMod]: Failed to load maps");
+            System.out.println("[UndercastMod]: ERROR: " + e.toString());
         }
     }
 
@@ -119,8 +119,8 @@ public class AresData {
                 
                 AresCustomMethods.sortServers();
             } catch (Exception e) {
-                System.out.println("[ProjectAres]: Failed to parse maps");
-                System.out.println("[ProjectAres]: ERROR: " + e.toString());
+                System.out.println("[UndercastMod]: Failed to parse maps");
+                System.out.println("[UndercastMod]: ERROR: " + e.toString());
             }
         }
     }
@@ -132,8 +132,8 @@ public class AresData {
         try {
             mapLoader = new InformationLoaderThread(new URL("https://oc.tc/play"));
         } catch(Exception e) {
-            System.out.println("[ProjectAres]: Failed to load maps");
-            System.out.println("[ProjectAres]: ERROR: " + e.toString());
+            System.out.println("[UndercastMod]: Failed to load maps");
+            System.out.println("[UndercastMod]: ERROR: " + e.toString());
         }
         mapLoaderFinished = false;
     }

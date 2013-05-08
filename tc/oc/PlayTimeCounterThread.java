@@ -10,8 +10,8 @@ public class PlayTimeCounterThread extends Thread {
                 this.start();
             }
         } catch (Exception e) {
-            System.out.println("[ProjectAres]: Playing Time Counter crashed");
-            System.out.println("[ProjectAres]: ERROR: " + e.toString());
+            System.out.println("[UndercastMod]: Playing Time Counter crashed");
+            System.out.println("[UndercastMod]: ERROR: " + e.toString());
         }
     }
     

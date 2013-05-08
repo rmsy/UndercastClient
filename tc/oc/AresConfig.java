@@ -10,8 +10,9 @@ import java.util.Properties;
 
 public class AresConfig {
     private static Properties defaults = new Properties();
-    private String configPath;
+    private static String CONFIG_PATH;
     private Properties config;
+    private static final String FILE_NAME = "UndercastMod.cfg";
     
     // update this value to change the config version.
     private static int version = 4;
@@ -45,6 +46,11 @@ public class AresConfig {
      * Default values created when class is first referenced
      */
     static {
+        try {
+        CONFIG_PATH = ModLoader.getMinecraftInstance().getMinecraftDir().getCanonicalPath() + File.separatorChar + "config" + File.separatorChar + "UndercastClient" + File.separatorChar;
+        } catch(Exception e) {
+            System.out.println("[UndercastMod]: Failed to get config path.");
+        }
         defaults.setProperty("showFPS", "true");
         defaults.setProperty("showKills", "true");
         defaults.setProperty("showDeaths", "true");
@@ -72,7 +78,7 @@ public class AresConfig {
     }
 
     public AresConfig() {
-        System.out.println("[ProjectAres]: Attempting to load/create the configuration.");
+        System.out.println("[UndercastMod]: Attempting to load/create the configuration.");
         loadConfig();
         loadConfigData();
     }
@@ -86,15 +92,13 @@ public class AresConfig {
         config = new Properties(defaults);
 
         try {
-            configPath = ModLoader.getMinecraftInstance().getMinecraftDir().getCanonicalPath() + File.separatorChar + "config" + File.separatorChar + "UnofficialProjectAres" + File.separatorChar;
-
-            File cfg = new File(configPath + "mod_Ares.cfg");
+            File cfg = new File(CONFIG_PATH + FILE_NAME);
 
             if(cfg.exists()) {
-                System.out.println("[ProjectAres]: Config file found, loading...");
-                config.load(new FileInputStream(configPath + "mod_Ares.cfg"));
+                System.out.println("[UndercastMod]: Config file found, loading...");
+                config.load(new FileInputStream(CONFIG_PATH + FILE_NAME));
             } else {
-                System.out.println("[ProjectAres]: No config file found, creating...");
+                System.out.println("[UndercastMod]: No config file found, creating...");
                 createConfig(cfg);
             }
         } catch (Exception e) {
@@ -109,9 +113,9 @@ public class AresConfig {
      * @param cfg config file
      */
     private void createConfig(File cfg) {
-        File folder = new File(configPath);
+        File folder = new File(CONFIG_PATH);
         if(!folder.exists()) {
-            System.out.println("[ProjectAres]: No folder found, creating...");
+            System.out.println("[UndercastMod]: No folder found, creating...");
             folder.mkdir();
         }
         try {
@@ -141,7 +145,7 @@ public class AresConfig {
             config.setProperty("enableButtonTooltips", "true");
             config.setProperty("configVersion", ""+version);
 
-            config.store(new FileOutputStream(configPath +"mod_Ares.cfg"),"This is the Unoffical Project Ares Mod Config" + "\nCustomize it to your taste" + "\nkeyGui = Ingame Stats" +"\nkeyGui2 = Ingame Server Menu" + "\nkeyGui3 = Full Bright\n");
+            config.store(new FileOutputStream(CONFIG_PATH + FILE_NAME),"This is the Unoffical Project Ares Mod Config" + "\nCustomize it to your taste" + "\nkeyGui = Ingame Stats" +"\nkeyGui2 = Ingame Server Menu" + "\nkeyGui3 = Full Bright\n");
         } catch (Exception e) {
             displayErrorMessage(e.toString());
         }
@@ -151,7 +155,7 @@ public class AresConfig {
      * Loads the property data into the local data
      */
     public void loadConfigData() {
-        System.out.println("[ProjectAres]: Loading Config to Local Data");
+        System.out.println("[UndercastMod]: Loading Config to Local Data");
         showFPS = this.getBoolProperty("showFPS");
         showKills = this.getBoolProperty("showKills");
         showDeaths = this.getBoolProperty("showDeaths");
@@ -242,15 +246,15 @@ public class AresConfig {
 
     public void saveConfig() {
         try {
-            config.store(new FileOutputStream(configPath + "mod_Ares.cfg"), null);
-            config.load(new FileInputStream(configPath + "mod_Ares.cfg"));
+            config.store(new FileOutputStream(CONFIG_PATH + FILE_NAME), null);
+            config.load(new FileInputStream(CONFIG_PATH + FILE_NAME));
         } catch (Exception e) {
             displayErrorMessage(e.toString());
         }
     }
 
     private void displayErrorMessage(String error) {
-        System.out.println("[ProjectAres]: ERROR: " + error);
+        System.out.println("[UndercastMod]: ERROR: " + error);
     }
     
     /***
@@ -258,7 +262,7 @@ public class AresConfig {
      */
     private void checkForConfigUpdate(){
         if(version != configVersion){
-            System.out.println("[ProjectAres]: Updating the config...");
+            System.out.println("[UndercastMod]: Updating the config...");
             switch(configVersion){
             case 0:
                 // add you additional options.

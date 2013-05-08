@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class mod_Ares extends BaseMod {
     public final static String MOD_VERSION = "1.5.2";
+    public final static String MOD_NAME = "UndercastMod";
     protected String username = "Not_Found";
     protected Minecraft mc = Minecraft.getMinecraft();
     private boolean mainMenuActive;
@@ -33,6 +34,11 @@ public class mod_Ares extends BaseMod {
     @Override
     public String getVersion() {
         return MOD_VERSION;
+    }
+
+    @Override
+    public String getName() {
+        return MOD_NAME;
     }
 
     @Override
@@ -231,13 +237,13 @@ public class mod_Ares extends BaseMod {
      */
     public void clientConnect(NetClientHandler var1) {
         AresData.setTeam(AresData.Teams.Observers); 
-        //if logging onto a project ares server, then enable the main mod
+        //if logging onto a overcast network server, then enable the main mod
         if (var1.getNetManager().getSocketAddress().toString().contains(".oc.tc")) {
             // What happens if logs into project ares
             AresData.isPA = true;
             AresData.isLobby = true;
             AresData.guiShowing = true;
-            System.out.println("Ares mod activated!");
+            System.out.println("[UndercastMod] Joined Overcast Network - Mod activated!");
             AresData.setTeam(AresData.Teams.Observers);
             AresData.setServer("Lobby");
             playTimeCounter = new PlayTimeCounterThread();
@@ -259,8 +265,8 @@ public class mod_Ares extends BaseMod {
                     } catch (InterruptedException e) {
                     }
                     mc.thePlayer.addChatMessage("\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-");
-                    mc.thePlayer.addChatMessage("[ProjectAres]: A New Version of the Project Ares Mod is avaliable");
-                    mc.thePlayer.addChatMessage("[ProjectAres]: Link: \u00A74"+AresData.updateLink);
+                    mc.thePlayer.addChatMessage("[UndercastMod]: A New Version of the Project Ares Mod is avaliable");
+                    mc.thePlayer.addChatMessage("[UndercastMod]: Link: \u00A74"+AresData.updateLink);
                     mc.thePlayer.addChatMessage("\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-\u00A7m-");
                 }
             };
