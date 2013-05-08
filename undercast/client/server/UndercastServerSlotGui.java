@@ -1,4 +1,4 @@
-package tc.oc.server;
+package undercast.client.server;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiButton;
@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 import java.nio.DoubleBuffer;
 import java.util.List;
 
-public abstract class Ares_ServerSlotGui {
+public abstract class UndercastServerSlotGui {
     /**
      * The width of the GuiScreen. Affects the container rendering, but not the overlays.
      */
@@ -92,9 +92,9 @@ public abstract class Ares_ServerSlotGui {
     private boolean field_77243_s;
     private int field_77242_t;
     private DoubleBuffer doubleBuffer;
-    private Ares_ServerGUI parent;
+    private UndercastServerGUI parent;
 
-    public Ares_ServerSlotGui(Ares_ServerGUI guiservers, int par2, int par3, int par4, int par5, int par6) {
+    public UndercastServerSlotGui(UndercastServerGUI guiservers, int par2, int par3, int par4, int par5, int par6) {
         this.parent = guiservers;
         this.width = par2;
         this.height = par3;

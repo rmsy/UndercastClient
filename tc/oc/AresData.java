@@ -9,7 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 import undercast.client.internetTools.InformationLoaderThread;
 import undercast.client.internetTools.ServerStatusHTMLParser;
-import tc.oc.server.AresServer;
+import undercast.client.server.UndercastServer;
 
 import java.net.URL;
 import java.util.HashSet;
@@ -32,8 +32,8 @@ public class AresData {
     public static String updateLink;
     private static InformationLoaderThread mapLoader;
     private static boolean mapLoaderFinished;
-    public static AresServer[] serverInformation;
-    public static AresServer[] sortedServerInformation;
+    public static UndercastServer[] serverInformation;
+    public static UndercastServer[] sortedServerInformation;
     public static int serverCount;
     // if it's true, the /server comand isn't executed after a "Welcome to Project Ares" message
     public static boolean welcomeMessageExpected = false;
@@ -67,14 +67,14 @@ public class AresData {
         keybind2 = new KeyBinding("inGameGui", Keyboard.getKeyIndex("L"));
         keybind3 = new KeyBinding("fullBright", Keyboard.getKeyIndex("G"));
         mapLoaderFinished = false;
-        serverInformation = new AresServer[20];
+        serverInformation = new UndercastServer[20];
         serverCount = 0;
         for(int c = 0;c < serverInformation.length; c++) {
-            serverInformation[c] = new AresServer();
+            serverInformation[c] = new UndercastServer();
         }
-        sortedServerInformation = new AresServer[20];
+        sortedServerInformation = new UndercastServer[20];
         for(int c = 0;c < sortedServerInformation.length; c++) {
-            sortedServerInformation[c] = new AresServer();
+            sortedServerInformation[c] = new UndercastServer();
         }
         sortIndex = 0;
         try {

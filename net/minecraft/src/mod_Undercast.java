@@ -7,11 +7,10 @@ package net.minecraft.src;
 import net.minecraft.client.Minecraft;
 import tc.oc.*;
 import tc.oc.AresData.Teams;
-import tc.oc.controls.*;
-import tc.oc.server.*;
 import tc.oc.update.*;
 import tc.oc.internetTools.*;
-import undercast.client.controls.UndercastControls;
+import undercast.client.controls.*;
+import undercast.client.server.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -308,7 +307,7 @@ public class mod_Undercast extends BaseMod {
             if (keybinding == AresData.keybind) {
                 AresData.guiShowing = !AresData.guiShowing;
             } else if (keybinding == AresData.keybind2) {
-                ModLoader.openGUI(mc.thePlayer, new Ares_ServerGUI(true));
+                ModLoader.openGUI(mc.thePlayer, new UndercastServerGUI(true));
             }
             //if you are an obs;have the config to true; toggle fullbright and play sound
             else if(AresData.isPlayingAres() && keybinding == AresData.keybind3 && (AresData.team == Teams.Observers || AresData.isGameOver) && CONFIG.fullBright){

@@ -1,4 +1,4 @@
-package tc.oc.server;
+package undercast.client.server;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Tessellator;
@@ -7,8 +7,8 @@ import tc.oc.AresData.ServerType;
 
 import java.util.ArrayList;
 
-class Ares_ServerInfoSlotGui extends Ares_ServerSlotGui {
-    final Ares_ServerGUI parent;
+class UndercastServerInfoSlotGui extends UndercastServerSlotGui {
+    final UndercastServerGUI parent;
 
     /**
      * Default constructor to create list
@@ -16,7 +16,7 @@ class Ares_ServerInfoSlotGui extends Ares_ServerSlotGui {
      * @param guiservers Main server gui screen
      * @param servers    list of servers
      */
-    public Ares_ServerInfoSlotGui(Ares_ServerGUI guiservers) {
+    public UndercastServerInfoSlotGui(UndercastServerGUI guiservers) {
         super(guiservers, guiservers.width, guiservers.height, 32, guiservers.height - 64, 36);
         this.parent = guiservers;
     }
@@ -25,7 +25,7 @@ class Ares_ServerInfoSlotGui extends Ares_ServerSlotGui {
      * Main draw method for the individual server boxes
      */
     protected void drawSlot(int i, int j, int k, int l, Tessellator tessellator) {
-        AresServer server = AresData.sortedServerInformation[i];
+        UndercastServer server = AresData.sortedServerInformation[i];
 
         parent.drawString(Minecraft.getMinecraft().fontRenderer, getServerName(server), j + 2, k + 1, 16777215);
         int serveNameWidth = Minecraft.getMinecraft().fontRenderer.getStringWidth(getServerName(server));
@@ -54,7 +54,7 @@ class Ares_ServerInfoSlotGui extends Ares_ServerSlotGui {
         }
     }
 
-    private String getServerName(AresServer server) {
+    private String getServerName(UndercastServer server) {
         return ("\2475" + Character.toUpperCase(server.name.charAt(0)) + server.name.substring(1) + "\247f");
     }
 
@@ -67,7 +67,7 @@ class Ares_ServerInfoSlotGui extends Ares_ServerSlotGui {
         }
     }
 
-    private int getMatchColor(AresServer server) {
+    private int getMatchColor(UndercastServer server) {
         switch(server.matchState) {
         case Started:
             return 0xFFFF00; // yellow

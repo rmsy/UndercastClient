@@ -1,4 +1,4 @@
-package tc.oc.server;
+package undercast.client.server;
 //You may not release this source under any condition, it must be linked to this page
 //You may recompile and publish as long as skipperguy12 and Guru_Fraser are given credit
 //You may not claim this to be your own
@@ -13,10 +13,10 @@ import tc.oc.GuiButtonTooltip;
 import java.awt.*;
 import java.net.URI;
 
-public class Ares_ServerGUI extends GuiScreen {
-    private Ares_ServerInfoSlotGui guiServerInfoSlot;
+public class UndercastServerGUI extends GuiScreen {
+    private UndercastServerInfoSlotGui guiServerInfoSlot;
 
-    private AresServer selectedServer;
+    private UndercastServer selectedServer;
     private int selected = -1;
     private GuiButton guibuttonrefresh;
     public Boolean inGame;
@@ -26,7 +26,7 @@ public class Ares_ServerGUI extends GuiScreen {
      *
      * @param inGame Boolean if you are on a server or not
      */
-    public Ares_ServerGUI(boolean inGame) {
+    public UndercastServerGUI(boolean inGame) {
         this.inGame = inGame;
         AresData.reload();
     }
@@ -44,7 +44,7 @@ public class Ares_ServerGUI extends GuiScreen {
         this.buttonList.add(new GuiButtonTooltip(3, this.width / 2 - 100, height - 28, 98, 20, "Player Stats", "Open your player stats in the browser"));
         this.buttonList.add(new GuiButtonTooltip(4, this.width / 2 - 150, height - 28, 48, 20, AresData.sortNames[AresData.sortIndex], "Sort the servers - Match is currently disabled (because we don't know the status)"));
         this.buttonList.add(new GuiButtonTooltip(5, this.width / 2 + 102, height - 28, 48, 20, "Lobby", "Join / Swap to the lobby"));
-        guiServerInfoSlot = new Ares_ServerInfoSlotGui(this);
+        guiServerInfoSlot = new UndercastServerInfoSlotGui(this);
     }
 
     /**

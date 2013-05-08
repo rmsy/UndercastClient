@@ -3,7 +3,7 @@ package tc.oc;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.ModLoader;
-import tc.oc.server.Ares_ServerGUI;
+import undercast.client.server.UndercastServerGUI;
 
 public class AresMenuButton extends GuiButtonTooltip {
     /**
@@ -21,6 +21,6 @@ public class AresMenuButton extends GuiButtonTooltip {
     @Override
     public void mouseReleased(int par1, int par2) {
         Minecraft mc = Minecraft.getMinecraft();
-        ModLoader.openGUI(mc.thePlayer, new Ares_ServerGUI(false));
+        ModLoader.openGUI(mc.thePlayer, new UndercastServerGUI(false));
     }
 }
