@@ -7,8 +7,8 @@ package tc.oc;
 import net.minecraft.src.KeyBinding;
 import org.lwjgl.input.Keyboard;
 
-import tc.oc.internetTools.InformationLoaderThread;
-import tc.oc.internetTools.ServerStatusHTMLParser;
+import undercast.client.internetTools.InformationLoaderThread;
+import undercast.client.internetTools.ServerStatusHTMLParser;
 import tc.oc.server.AresServer;
 
 import java.net.URL;
