@@ -11,6 +11,7 @@ import tc.oc.controls.*;
 import tc.oc.server.*;
 import tc.oc.update.*;
 import tc.oc.internetTools.*;
+import undercast.client.controls.UndercastControls;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,7 +29,7 @@ public class mod_Undercast extends BaseMod {
     public static boolean brightActive;
     public float brightLevel = (float) 20.0D;
     public float defaultLevel = mc.gameSettings.gammaSetting;
-    private ControlsAres controlAres;
+    private UndercastControls undercastControls;
     private PlayTimeCounterThread playTimeCounter;
 
     @Override
@@ -61,7 +62,7 @@ public class mod_Undercast extends BaseMod {
         new Ares_UpdaterThread();
 
         //load the new controls menu
-        controlAres = new ControlsAres();
+        undercastControls = new UndercastControls();
 
         //hook keybinds
         ModLoader.registerKey(this, AresData.keybind, false);
@@ -221,7 +222,7 @@ public class mod_Undercast extends BaseMod {
     }
     
     public boolean onTickInGUI(float tick, Minecraft mc, GuiScreen screen){
-        controlAres.onTickInGUI(tick, mc, screen);
+        undercastControls.onTickInGUI(tick, mc, screen);
         AresData.update();
         this.addOvercastButton();
         // Listen for disconnect, as it isn't properly called

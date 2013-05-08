@@ -1,4 +1,4 @@
-package tc.oc.controls;
+package undercast.client.controls;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
@@ -6,14 +6,14 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 public class GuiControlsScrollPanel extends GuiSlot {
-    private GuiAresControls controls;
+    private GuiUndercastControls controls;
     private GameSettings options;
     private Minecraft mc;
     private int _mouseX;
     private int _mouseY;
     private int selected = -1;
 
-    public GuiControlsScrollPanel(GuiAresControls controls, GameSettings options, Minecraft mc) {
+    public GuiControlsScrollPanel(GuiUndercastControls controls, GameSettings options, Minecraft mc) {
         super(mc, controls.width, controls.height, 16, (controls.height - 32) + 4, 25);
         this.controls = controls;
         this.options = options;

@@ -1,11 +1,11 @@
-package tc.oc.controls;
+package undercast.client.controls;
 
 import net.minecraft.src.GameSettings;
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiScreen;
 import net.minecraft.src.StringTranslate;
 
-public class GuiAresControls extends GuiScreen {
+public class GuiUndercastControls extends GuiScreen {
     /**
      * A reference to the screen object that created this. Used for navigating between screens.
      */
@@ -23,7 +23,7 @@ public class GuiAresControls extends GuiScreen {
 
     private GuiControlsScrollPanel scrollPane;
 
-    public GuiAresControls(GuiScreen par1GuiScreen, GameSettings par2GameSettings) {
+    public GuiUndercastControls(GuiScreen par1GuiScreen, GameSettings par2GameSettings) {
         this.parentScreen = par1GuiScreen;
         this.options = par2GameSettings;
     }
