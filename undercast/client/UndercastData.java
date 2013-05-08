@@ -43,6 +43,8 @@ public class UndercastData {
     public static int playTimeMin;
     public static int sortIndex;
     public static boolean isGameOver = false;
+    // saves if a /server command (without argument) was executed, if it's false, the user executed it
+    public static boolean serverDetectionCommandExecuted = false;
 
     public static boolean guiShowing;
     public static KeyBinding keybind;
