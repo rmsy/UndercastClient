@@ -60,8 +60,8 @@ public class UndercastKillsHandler {
                 try {
                     Thread.sleep(1000L);
                     Achievement custom = (new Achievement(27, "custom", 1, 4, Item.ingotIron, (Achievement) null));
-                    UndercastGuiAchievement gui = 
-                    ((UndercastGuiAchievement) Minecraft.getMinecraft().guiAchievement);
+                    UndercastGuiAchievement gui = new UndercastGuiAchievement(Minecraft.getMinecraft());
+                    Minecraft.getMinecraft().guiAchievement = gui;
                     gui.addFakeAchievementToMyList(custom, killOrKilled, killer);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(UndercastKillsHandler.class.getName()).log(Level.SEVERE, null, ex);
