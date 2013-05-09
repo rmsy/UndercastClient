@@ -45,7 +45,7 @@ public class UndercastChatHandler {
             }
         }
         //if you die
-        else if (message.startsWith(username)) {
+        else if (message.startsWith(username) && !message.toLowerCase().contains(" team")) {
             UndercastData.addDeaths(1);
             UndercastData.resetKillstreak();
         }
