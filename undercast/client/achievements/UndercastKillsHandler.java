@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.Achievement;
+import net.minecraft.src.mod_Undercast;
 
 /**
  * @author Flv92
@@ -24,19 +25,19 @@ public class UndercastKillsHandler {
 
     public UndercastKillsHandler(String message, String username, EntityPlayer player) {
       //When you die from someone
-        if (message.startsWith(username) && !message.toLowerCase().endsWith(" team") && (message.contains(" by ") || message.contains(" took ") || message.contains("fury of"))) {
+        if (mod_Undercast.CONFIG.showDeathAchievements && message.startsWith(username) && !message.toLowerCase().endsWith(" team") && (message.contains(" by ") || message.contains(" took ") || message.contains("fury of"))) {
             killer = message.substring(message.indexOf("by") + 3, message.lastIndexOf("'s") == -1 ? message.length() : message.lastIndexOf("'s"));
             killOrKilled = false;
             this.printAchievement();
         } //if you kill a person
-        else if (message.contains("by " + username) || message.contains("took " + username) || message.contains("fury of " + username)) {
+        else if (mod_Undercast.CONFIG.showKillAchievements && message.contains("by " + username) || message.contains("took " + username) || message.contains("fury of " + username)) {
             System.out.println(message.substring(0, message.indexOf(" ")));
             killer = message.substring(0, message.indexOf(" "));
             killOrKilled = true;
             this.printAchievement();
         }
         //when you die, but nobody killed you.
-        else if (message.startsWith(username) && !message.toLowerCase().endsWith(" team")) {
+        else if (mod_Undercast.CONFIG.showDeathAchievements && message.startsWith(username) && !message.toLowerCase().endsWith(" team")) {
             killer = username;
             killOrKilled = false;
             this.printAchievement();

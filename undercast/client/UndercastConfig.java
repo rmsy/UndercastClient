@@ -15,7 +15,7 @@ public class UndercastConfig {
     private static final String FILE_NAME = "UndercastMod.cfg";
     
     // update this value to change the config version.
-    private static int version = 4;
+    private static int version = 5;
 
     // main variables
     public static boolean showFPS;
@@ -40,6 +40,9 @@ public class UndercastConfig {
     public static boolean fullBright;
     public static boolean matchOnServerJoin;
     public static boolean enableButtonTooltips;
+    public static boolean showAchievements;
+    public static boolean showKillAchievements;
+    public static boolean showDeathAchievements;
     public static int configVersion;
 
     /**
@@ -73,6 +76,9 @@ public class UndercastConfig {
         defaults.setProperty("fullBright", "true");
         defaults.setProperty("matchOnServerJoin", "false");
         defaults.setProperty("enableButtonTooltips", "true");
+        defaults.setProperty("showAchievements", "false");
+        defaults.setProperty("showKillAchievements", "true");
+        defaults.setProperty("showDeathAchievements", "true");
         // if the value is missing, it should force an update. Don't change it.
         defaults.setProperty("configVersion", "0");
     }
@@ -143,6 +149,9 @@ public class UndercastConfig {
             config.setProperty("fullBright", "true");
             config.setProperty("matchOnServerJoin", "false");
             config.setProperty("enableButtonTooltips", "true");
+            config.setProperty("showAchievements", "false");
+            config.setProperty("showKillAchievements", "true");
+            config.setProperty("showDeathAchievements", "true");
             config.setProperty("configVersion", ""+version);
 
             config.store(new FileOutputStream(CONFIG_PATH + FILE_NAME),"This is the Unoffical Project Ares Mod Config" + "\nCustomize it to your taste" + "\nkeyGui = Ingame Stats" +"\nkeyGui2 = Ingame Server Menu" + "\nkeyGui3 = Full Bright\n");
@@ -178,6 +187,9 @@ public class UndercastConfig {
         fullBright = this.getBoolProperty("fullBright");
         matchOnServerJoin = this.getBoolProperty("matchOnServerJoin");
         enableButtonTooltips = this.getBoolProperty("enableButtonTooltips");
+        showAchievements = this.getBoolProperty("showAchievements");
+        showKillAchievements = this.getBoolProperty("showKillAchievements");
+        showDeathAchievements = this.getBoolProperty("showDeathAchievements");
         configVersion = this.getIntProperty("configVersion");
         
         checkForConfigUpdate();
@@ -285,6 +297,16 @@ public class UndercastConfig {
                     config.setProperty("showPlayingTime", "false");
                 }
             case 4:
+                if(showAchievements == false) {
+                    config.setProperty("showAchievments", "false");
+                }
+                if(showKillAchievements == true) {
+                    config.setProperty("showKillAchievements", "true");
+                }
+                if(showDeathAchievements == true) {
+                    config.setProperty("showDeathAchievements", "true");
+                }
+            case 5:
                 // for the next version.
             }
             config.setProperty("configVersion", ""+version);
