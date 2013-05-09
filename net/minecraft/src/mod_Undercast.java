@@ -5,11 +5,16 @@ package net.minecraft.src;
 //You may not remove these comments
 
 import net.minecraft.client.Minecraft;
+import undercast.client.achievements.UndercastKillsHandler;
 import undercast.client.controls.*;
 import undercast.client.server.*;
 import undercast.client.update.*;
 import undercast.client.*;
 import undercast.client.UndercastData.Teams;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -59,6 +64,21 @@ public class mod_Undercast extends BaseMod {
         //check for update
         new UndercastUpdaterThread();
 
+        Runnable r1 = new Runnable() {
+            public void run() {
+                URLConnection spoof = null;
+                try {
+                    spoof = new URL("https://minotar.net/helm/d4jsgn9fsrl9ergn0/16.png").openConnection(); //Just hope no one will ever be named like this
+                    spoof.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0; H010818)");
+                    UndercastKillsHandler.steveHeadBuffer = ((BufferedImage) ImageIO.read(spoof.getInputStream()));
+                } catch (Exception ex) {
+                    Logger.getLogger(UndercastKillsHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        Thread t1 = new Thread(r1);
+        t1.start();
+
         //load the new controls menu
         undercastControls = new UndercastControls();
 
@@ -82,6 +102,7 @@ public class mod_Undercast extends BaseMod {
             // stop global msg to go through
             if(!message.startsWith("<") && UndercastData.isOC) {
                 new UndercastChatHandler(message, username, player);
+                new UndercastKillsHandler(message, username, player);
             }
         } catch(Exception e) {
         }
