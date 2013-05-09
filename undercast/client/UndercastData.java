@@ -65,9 +65,9 @@ public class UndercastData {
         resetLargestKillstreak();
         setTeam(Teams.Observers);
         guiShowing = true;
-        keybind = new KeyBinding("gui", Keyboard.getKeyIndex("F6"));
-        keybind2 = new KeyBinding("inGameGui", Keyboard.getKeyIndex("L"));
-        keybind3 = new KeyBinding("fullBright", Keyboard.getKeyIndex("G"));
+        keybind = new KeyBinding("undercast.gui", Keyboard.getKeyIndex("F6"));
+        keybind2 = new KeyBinding("undercast.inGameGui", Keyboard.getKeyIndex("L"));
+        keybind3 = new KeyBinding("undercast.fullBright", Keyboard.getKeyIndex("G"));
         mapLoaderFinished = false;
         serverInformation = new UndercastServer[20];
         serverCount = 0;

@@ -54,9 +54,9 @@ public class mod_Undercast extends BaseMod {
         ModLoader.setInGUIHook(this, true, false);
         ModLoader.setInGameHook(this, true, false);
 
-        ModLoader.addLocalization("keybind", "gui");
-        ModLoader.addLocalization("keybind", "inGameGui");
-        ModLoader.addLocalization("keybind", "fullBright");
+        ModLoader.addLocalization("undercast.gui", "Toggle Overcast Network mod gui");
+        ModLoader.addLocalization("undercast.inGameGui", "Switch to a Overcast Network server");
+        ModLoader.addLocalization("undercast.fullBright", "Toggle fullbright");
 
         //load variables defaults
         new UndercastData();
