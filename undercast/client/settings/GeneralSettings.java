@@ -112,11 +112,24 @@ public class GeneralSettings extends GuiScreen {
             SettingsToggleButton button = (SettingsToggleButton) guibutton;
             button.buttonPressed();
         } else if (guibutton.id == 1) {
+            //secure reading of the int values
+            int x, y = 0;
+            try {
+                x = Integer.parseInt(xTextField.getText());
+            } catch (Exception e) {
+                x = 0;
+            }
+            try {
+                y = Integer.parseInt(yTextField.getText());
+            } catch (Exception e) {
+                y = 0;
+            }
+            
             //Close screen
-            mod_Undercast.CONFIG.setProperty("X", Integer.parseInt(xTextField.getText()));
-            mod_Undercast.CONFIG.x = Integer.parseInt(xTextField.getText());
-            mod_Undercast.CONFIG.setProperty("Y", Integer.parseInt(xTextField.getText()));
-            mod_Undercast.CONFIG.y = Integer.parseInt(yTextField.getText());
+            mod_Undercast.CONFIG.setProperty("X", x);
+            mod_Undercast.CONFIG.x = x;
+            mod_Undercast.CONFIG.setProperty("Y", y);
+            mod_Undercast.CONFIG.y = y;
             ModLoader.openGUI(mc.thePlayer, new SettingsGUI());
         }
 
