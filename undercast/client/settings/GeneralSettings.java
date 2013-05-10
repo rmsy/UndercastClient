@@ -87,10 +87,18 @@ public class GeneralSettings extends GuiScreen {
     @Override
     protected void keyTyped(char par1, int par2) {
         if (par2 == Keyboard.KEY_ESCAPE) {
-            mod_Undercast.CONFIG.setProperty("X", Integer.parseInt(xTextField.getText()));
-            mod_Undercast.CONFIG.x = Integer.parseInt(xTextField.getText());
-            mod_Undercast.CONFIG.setProperty("Y", Integer.parseInt(xTextField.getText()));
-            mod_Undercast.CONFIG.y = Integer.parseInt(yTextField.getText());
+                //secure reading of the int values
+                int x, y = 0;
+                try {
+                    x = Integer.parseInt(xTextField.getText());
+                } catch (Exception e) {
+                    x = 0;
+                }
+                try {
+                    y = Integer.parseInt(yTextField.getText());
+                } catch (Exception e) {
+                    y = 0;
+                }
             mc.displayGuiScreen(null);
             return;
         }
