@@ -69,7 +69,7 @@ public class UndercastData {
         keybind = new KeyBinding("undercast.gui", Keyboard.getKeyIndex("F6"));
         keybind2 = new KeyBinding("undercast.inGameGui", Keyboard.getKeyIndex("L"));
         keybind3 = new KeyBinding("undercast.fullBright", Keyboard.getKeyIndex("G"));
-        keybind3 = new KeyBinding("undercast.settings", Keyboard.getKeyIndex("P"));
+        keybind4 = new KeyBinding("undercast.settings", Keyboard.getKeyIndex("P"));
         
         mapLoaderFinished = false;
         serverInformation = new UndercastServer[20];
