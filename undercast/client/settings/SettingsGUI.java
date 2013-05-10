@@ -15,6 +15,7 @@ public class SettingsGUI extends GuiScreen {
         int y = height / 2;
         this.buttonList.add(new GuiButton(1, x, y-50, 150, 20, "Overlay Settings"));
         this.buttonList.add(new GuiButton(2, x, y-20, 150, 20, "General Settings"));
+        this.buttonList.add(new GuiButton(3, x, y+40, 150, 20, "Done"));
     }
 
     @Override
@@ -43,6 +44,9 @@ public class SettingsGUI extends GuiScreen {
         }
         if (guibutton.id == 2) {
             ModLoader.openGUI(mc.thePlayer, new GeneralSettings());
+        }
+        if (guibutton.id == 3) {
+            mc.displayGuiScreen(null);
         }
     }
 
