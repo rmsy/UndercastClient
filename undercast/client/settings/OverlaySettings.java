@@ -19,11 +19,11 @@ public class OverlaySettings extends GuiScreen {
         // Add buttons		
         int x1 = width / 2 - 150;
         int x2 = width / 2 + 10;
-        int y = height / 2 - 60;
+        int y = height / 2 - 80;
         for (int i = 0; i < toggleSettings.length / 2; i++) {
             this.buttonList.add(new SettingsToggleButton(i, x1, y+(i*25), 150, 20, "", enabledStrings[i], disabledStrings[i], toggleSettings[i]));
         }
-        y = height / 2 - 60;
+        y = height / 2 - 80;
         for (int i = toggleSettings.length / 2; i < toggleSettings.length; i++) {
             this.buttonList.add(new SettingsToggleButton(i, x2, y+((i - toggleSettings.length / 2)*25), 150, 20, "", enabledStrings[i], disabledStrings[i], toggleSettings[i]));
         }
@@ -36,7 +36,7 @@ public class OverlaySettings extends GuiScreen {
 public void drawScreen(int par1, int par2, float par3) {
         drawDefaultBackground();
         // Draw label at top of screen
-        drawCenteredString(fontRenderer, "Overlay settings", width / 2, height / 2 - 60 - 20, 0x4444bb);
+        drawCenteredString(fontRenderer, "Overlay settings", width / 2, height / 2 - 80 - 20, 0x4444bb);
 
         // Draw buttons
         super.drawScreen(par1, par2, par3);
