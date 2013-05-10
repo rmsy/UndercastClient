@@ -11,8 +11,8 @@ public class GeneralSettings extends GuiScreen {
 
     // Toggle settings
     public String[] toggleSettings = new String[]{ "showGuiChat", "showGuiMulti", "toggleTitleScreenButton", "filterTips", "matchOnServerJoin", "enableButtonTooltips", "showAchievements", "showDeathAchievements", "showKillAchievements"};
-    public String[] enabledStrings = new String[]{ "Chat gui shown", "Multi gui shown", "Title screen button disabled", "Tips filtered", "/match on server join", "Button tooltips shown", "Enabled Achievements shown", "Death Achievements shown", "Kill Achievements shown"};
-    public String[] disabledStrings = new String[]{ "Chat gui hidden", "Multi gui hidden", "Title screen button enabled", "No tips filtered", "No /match on server join", "Button tooltips hidden", "No Achievements shown", "No Death Achievements", "No Kill Achievements"};
+    public String[] enabledStrings = new String[]{ "Chat gui shown", "Overcast Button shown", "Death screen cleared", "Tips filtered", "/match on server join", "Button tooltips shown", "Enabled Achievements shown", "Death Achievements shown", "Kill Achievements shown"};
+    public String[] disabledStrings = new String[]{ "Chat gui hidden", "Overcast Button hidden", " Default death screen", "No tips filtered", "No /match on server join", "Button tooltips hidden", "No Achievements shown", "No Death Achievements", "No Kill Achievements"};
 
     // X Offset vars
     public GuiButton xPlusButton;
