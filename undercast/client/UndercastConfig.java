@@ -298,7 +298,7 @@ public class UndercastConfig {
                 }
             case 4:
                 if(showAchievements == false) {
-                    config.setProperty("showAchievments", "false");
+                    config.setProperty("showAchievements", "false");
                 }
                 if(showKillAchievements == true) {
                     config.setProperty("showKillAchievements", "true");
