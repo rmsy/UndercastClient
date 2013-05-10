@@ -108,7 +108,9 @@ public class mod_Undercast extends BaseMod {
             // stop global msg to go through
             if(!message.startsWith("<") && UndercastData.isOC) {
                 new UndercastChatHandler(message, username, player);
-                new UndercastKillsHandler(message, username, player);
+                if(CONFIG.showAchievements) {
+                    new UndercastKillsHandler(message, username, player);
+                }
             }
         } catch(Exception e) {
         }
