@@ -10,9 +10,9 @@ import org.lwjgl.input.Keyboard;
 public class GeneralSettings extends GuiScreen {
 
     // Toggle settings
-    public String[] toggleSettings = new String[]{ "showGuiChat", "showGuiMulti", "toggleTitleScreenButton", "filterTips", "matchOnServerJoin", "enableButtonTooltips"};
-    public String[] enabledStrings = new String[]{ "Chat gui shown", "Multi gui shown", "Title screen button disabled", "Tips filtered", "/match on server join", "Button tooltips shown"};
-    public String[] disabledStrings = new String[]{ "Chat gui hidden", "Multi gui hidden", "Title screen button enabled", "No tips filtered", "No /match on server join", "Button tooltips hidden"};
+    public String[] toggleSettings = new String[]{ "showGuiChat", "showGuiMulti", "toggleTitleScreenButton", "filterTips", "matchOnServerJoin", "enableButtonTooltips", "showAchievements", "showDeathAchievements", "showKillAchievements"};
+    public String[] enabledStrings = new String[]{ "Chat gui shown", "Multi gui shown", "Title screen button disabled", "Tips filtered", "/match on server join", "Button tooltips shown", "Enabled Achievements shown", "Death Achievements shown", "Kill Achievements shown"};
+    public String[] disabledStrings = new String[]{ "Chat gui hidden", "Multi gui hidden", "Title screen button enabled", "No tips filtered", "No /match on server join", "Button tooltips hidden", "No Achievements shown", "No Death Achievements", "No Kill Achievements"};
 
     // X Offset vars
     public GuiButton xPlusButton;
@@ -32,19 +32,19 @@ public class GeneralSettings extends GuiScreen {
         // Positioning
         int x1 = width / 2 - 150;
         int x2 = width / 2 + 10;
-        int y = height / 2 - 60;
+        int y = height / 2 - 80;
 
         // Add buttons
         for (int i = 0; i < toggleSettings.length / 2; i++) {
             this.buttonList.add(new SettingsToggleButton(0, x1, y+(i*25), 150, 20, "", enabledStrings[i], disabledStrings[i], toggleSettings[i]));
         }
-        y = height / 2 - 60;
+        y = height / 2 - 80;
         for (int i = toggleSettings.length / 2; i < toggleSettings.length; i++) {
             this.buttonList.add(new SettingsToggleButton(0, x2, y+((i - toggleSettings.length / 2)*25), 150, 20, "", enabledStrings[i], disabledStrings[i], toggleSettings[i]));
         }
 
         // Positioning
-        y = y + toggleSettings.length * 25;
+        y = (y - 50) + toggleSettings.length * 25;
         int x = width / 2 - 77;
         x2 = width / 2 + 75;
 
@@ -58,7 +58,7 @@ public class GeneralSettings extends GuiScreen {
         this.buttonList.add(xMinusButton);
         this.buttonList.add(yMinusButton);
         xTextField = new GuiTextField(mc.fontRenderer, x1+20, y-40, 35, 20);
-        xTextField.setText(Integer.toString(mod_Undercast.CONFIG.x));		
+        xTextField.setText(Integer.toString(mod_Undercast.CONFIG.x));
         yTextField = new GuiTextField(mc.fontRenderer, x2+20, y-40, 35, 20);
         yTextField.setText(Integer.toString(mod_Undercast.CONFIG.y));
         
@@ -70,14 +70,14 @@ public class GeneralSettings extends GuiScreen {
     public void drawScreen(int par1, int par2, float par3) {
         drawDefaultBackground();
         // Draw label at top of screen
-        drawCenteredString(fontRenderer, "General Settings", width / 2, height / 2 - 60 - 20, 0x4444bb);
+        drawCenteredString(fontRenderer, "General Settings", width / 2, height / 2 - 80 - 20, 0x4444bb);
         xTextField.drawTextBox();
         yTextField.drawTextBox();
 
         int x = width / 2 - 77,
                 x2 = width / 2 + 75,
                 x1 = width / 2 - 150;
-        int y = (height / 2 - 60) + toggleSettings.length * 25;
+        int y = (height / 2 - 80) + toggleSettings.length * 25;
         drawCenteredString(fontRenderer, "X Offset", x1+30, y-52, 0xffffff);
         drawCenteredString(fontRenderer, "Y Offset", x2+30, y-52, 0xffffff);
         // Draw buttons
@@ -135,13 +135,13 @@ public class GeneralSettings extends GuiScreen {
 
         //Handle +/-
         if (guibutton.id == 3) 
-            xTextField.setText("" + (Integer.parseInt(xTextField.getText()) + 1));
+            xTextField.setText(Integer.toString(Integer.parseInt(xTextField.getText()) + 1));
         if (guibutton.id == 4) 
-            yTextField.setText("" + (Integer.parseInt(yTextField.getText()) + 1));
+            yTextField.setText(Integer.toString(Integer.parseInt(yTextField.getText()) + 1));
         if (guibutton.id == 5) 
-            xTextField.setText("" + (Integer.parseInt(xTextField.getText()) - 1));
+            xTextField.setText(Integer.toString(Integer.parseInt(xTextField.getText()) - 1));
         if (guibutton.id == 6) 
-            yTextField.setText("" + (Integer.parseInt(yTextField.getText()) - 1));
+            yTextField.setText(Integer.toString(Integer.parseInt(yTextField.getText()) - 1));
     }
 
     @Override
