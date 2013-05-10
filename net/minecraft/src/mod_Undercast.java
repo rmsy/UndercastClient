@@ -4,23 +4,27 @@ package net.minecraft.src;
 //You may not claim this to be your own
 //You may not remove these comments
 
-import net.minecraft.client.Minecraft;
-import undercast.client.achievements.UndercastKillsHandler;
-import undercast.client.controls.*;
-import undercast.client.server.*;
-import undercast.client.update.*;
-import undercast.client.*;
-import undercast.client.UndercastData.Teams;
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
+import javax.imageio.ImageIO;
+
+import net.minecraft.client.Minecraft;
+import undercast.client.PlayTimeCounterThread;
+import undercast.client.UndercastChatHandler;
+import undercast.client.UndercastConfig;
+import undercast.client.UndercastCustomMethods;
+import undercast.client.UndercastData;
+import undercast.client.UndercastData.Teams;
+import undercast.client.UndercastMenuButton;
+import undercast.client.achievements.UndercastKillsHandler;
+import undercast.client.controls.UndercastControls;
+import undercast.client.server.UndercastServerGUI;
+import undercast.client.settings.SettingsGUI;
+import undercast.client.update.UndercastUpdaterThread;
 
 public class mod_Undercast extends BaseMod {
     public final static String MOD_VERSION = "1.5.2";
@@ -55,8 +59,9 @@ public class mod_Undercast extends BaseMod {
         ModLoader.setInGameHook(this, true, false);
 
         ModLoader.addLocalization("undercast.gui", "Toggle Overcast Network mod gui");
-        ModLoader.addLocalization("undercast.inGameGui", "Switch to a Overcast Network server");
+        ModLoader.addLocalization("undercast.inGameGui", "Switch to an Overcast Network server");
         ModLoader.addLocalization("undercast.fullBright", "Toggle fullbright");
+        ModLoader.addLocalization("undercast.settings", "Show Undercast mod settings");
 
         //load variables defaults
         new UndercastData();
@@ -86,6 +91,7 @@ public class mod_Undercast extends BaseMod {
         ModLoader.registerKey(this, UndercastData.keybind, false);
         ModLoader.registerKey(this, UndercastData.keybind2, false);
         ModLoader.registerKey(this, UndercastData.keybind3, false);
+        ModLoader.registerKey(this, UndercastData.keybind4, false);
     }
 
     /**
@@ -102,9 +108,7 @@ public class mod_Undercast extends BaseMod {
             // stop global msg to go through
             if(!message.startsWith("<") && UndercastData.isOC) {
                 new UndercastChatHandler(message, username, player);
-                if(CONFIG.showAchievements) {
-                    new UndercastKillsHandler(message, username, player);
-                }
+                new UndercastKillsHandler(message, username, player);
             }
         } catch(Exception e) {
         }
@@ -341,6 +345,8 @@ public class mod_Undercast extends BaseMod {
                         mc.gameSettings.gammaSetting = defaultLevel;
                     mc.sndManager.playSoundFX("random.click", 0.5F, 1.0F);
                 }
+            } else if (keybinding == UndercastData.keybind4) {
+                ModLoader.openGUI(mc.thePlayer, new SettingsGUI());
             }
         }
     }

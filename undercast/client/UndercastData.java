@@ -50,6 +50,7 @@ public class UndercastData {
     public static KeyBinding keybind;
     public static KeyBinding keybind2;
     public static KeyBinding keybind3;
+    public static KeyBinding keybind4;
 
     public static enum Teams {Red, Blue, Purple, Cyan, Lime, Yellow, Green, Orange, Observers, Unknown, Cot, Bot};
     public static enum MatchState {Starting, Started, Finished, Waiting, Lobby, Unknown};
@@ -68,6 +69,8 @@ public class UndercastData {
         keybind = new KeyBinding("undercast.gui", Keyboard.getKeyIndex("F6"));
         keybind2 = new KeyBinding("undercast.inGameGui", Keyboard.getKeyIndex("L"));
         keybind3 = new KeyBinding("undercast.fullBright", Keyboard.getKeyIndex("G"));
+        keybind3 = new KeyBinding("undercast.settings", Keyboard.getKeyIndex("P"));
+        
         mapLoaderFinished = false;
         serverInformation = new UndercastServer[20];
         serverCount = 0;
