@@ -46,13 +46,12 @@ public class UndercastChatHandler {
         }
         //if you die
         else if (message.startsWith(username) && !message.toLowerCase().endsWith(" team")) {
-            UndercastData.addDeaths(1);
-            UndercastData.resetKillstreak();
-        }
-        //if you die from someone
-        else if (message.startsWith(username) && (message.contains(" by ") || message.contains(" took "))) {
-            UndercastData.addKilled(1);
-            UndercastData.resetKillstreak();
+            // if you die form someone
+            if((message.contains(" by ") || message.contains(" took ") || message.contains(" fury of"))) {
+                UndercastData.addKilled(1);
+            }
+                UndercastData.addDeaths(1);
+                UndercastData.resetKillstreak();
         }
         //if you kill a person
         else if (message.contains("by " + username) || message.contains("took " + username) || message.contains("fury of " + username)) {
