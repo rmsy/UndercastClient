@@ -11,8 +11,8 @@ public class GeneralSettings extends GuiScreen {
 
 	//Toggle settings
 	public String[] toggleSettings = new String[]{ "showGuiChat", "showGuiMulti", "toggleTitleScreenButton", "filterTips", "matchOnServerJoin", "enableButtonTooltips"};
-	public String[] enabledStrings = new String[]{ "Chat gui shown", "Multi gui shown", "Title screen button", "Tips filtered", "/match on server join", "Button tooltips shown"};
-	public String[] disabledStrings = new String[]{ "Chat gui hidden", "Multi gui hidden", "Playing time hidden", "No title screen button", "No tips filtered", "No /match on server join", "Button tooltips hidden"};
+	public String[] enabledStrings = new String[]{ "Chat gui shown", "Multi gui shown", "Title screen button disabled", "Tips filtered", "/match on server join", "Button tooltips shown"};
+	public String[] disabledStrings = new String[]{ "Chat gui hidden", "Multi gui hidden", "Title screen button enabled", "No title screen button", "No tips filtered", "No /match on server join", "Button tooltips hidden"};
 
 	//X Offset vars
 	public GuiButton xPlusButton;
