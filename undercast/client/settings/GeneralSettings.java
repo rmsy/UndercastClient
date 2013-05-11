@@ -99,6 +99,10 @@ public class GeneralSettings extends GuiScreen {
                 } catch (Exception e) {
                     y = 0;
                 }
+                mod_Undercast.CONFIG.setProperty("X", x);
+                mod_Undercast.CONFIG.x = x;
+                mod_Undercast.CONFIG.setProperty("Y", y);
+                mod_Undercast.CONFIG.y = y;
             mc.displayGuiScreen(null);
             return;
         }
