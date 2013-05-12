@@ -54,7 +54,7 @@ public class UndercastChatHandler {
                 UndercastData.resetKillstreak();
         }
         //if you kill a person
-        else if (message.contains("by " + username) || message.contains("took " + username) || message.contains("fury of " + username)) {
+        else if ((message.contains("by " + username) && !message.toLowerCase().contains(" destroyed by ")) || message.contains("took " + username) || message.contains("fury of " + username)) {
             UndercastData.addKills(1);
             UndercastData.addKillstreak(1);
         }

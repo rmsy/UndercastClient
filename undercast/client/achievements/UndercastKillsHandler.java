@@ -32,7 +32,7 @@ public class UndercastKillsHandler {
             killOrKilled = false;
             this.printAchievement();
         } //if you kill a person
-        else if (message.contains("by " + username) || message.contains("took " + username) || message.contains("fury of " + username)) {
+        else if ((message.contains("by " + username) && !message.toLowerCase().contains(" destroyed by ")) || message.contains("took " + username) || message.contains("fury of " + username)) {
             if(UndercastData.isNextKillFirstBlood){
                 if(mod_Undercast.CONFIG.showFirstBloodAchievement) {
                     printFirstBloodAchievement();
@@ -50,7 +50,7 @@ public class UndercastKillsHandler {
             killOrKilled = false;
             this.printAchievement();
         } //When someone die
-        else if ((message.contains("by ") || message.contains("took ") || message.contains("fury of ")) && !message.toLowerCase().endsWith(" team")) {
+        else if ((message.contains("by ") || message.contains("took ") || message.contains("fury of ")) && !message.toLowerCase().endsWith(" team") && !message.toLowerCase().contains(" destroyed by ")) {
             UndercastData.isNextKillFirstBlood = false;
         }
     }
