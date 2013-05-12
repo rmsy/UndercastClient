@@ -15,7 +15,7 @@ public class UndercastConfig {
     private static final String FILE_NAME = "UndercastMod.cfg";
     
     // update this value to change the config version.
-    private static int version = 5;
+    private static int version = 6;
 
     // main variables
     public static boolean showFPS;
@@ -43,6 +43,7 @@ public class UndercastConfig {
     public static boolean showAchievements;
     public static boolean showKillAchievements;
     public static boolean showDeathAchievements;
+    public static boolean showFirstBloodAchievement;
     public static int configVersion;
 
     /**
@@ -79,6 +80,7 @@ public class UndercastConfig {
         defaults.setProperty("showAchievements", "false");
         defaults.setProperty("showKillAchievements", "true");
         defaults.setProperty("showDeathAchievements", "true");
+        defaults.setProperty("showFirstBloodAchievement", "true");
         // if the value is missing, it should force an update. Don't change it.
         defaults.setProperty("configVersion", "0");
     }
@@ -152,6 +154,7 @@ public class UndercastConfig {
             config.setProperty("showAchievements", "false");
             config.setProperty("showKillAchievements", "true");
             config.setProperty("showDeathAchievements", "true");
+            config.setProperty("showFirstBloodAchievement", "true");
             config.setProperty("configVersion", ""+version);
 
             config.store(new FileOutputStream(CONFIG_PATH + FILE_NAME),"This is the Unoffical Project Ares Mod Config" + "\nCustomize it to your taste" + "\nkeyGui = Ingame Stats" +"\nkeyGui2 = Ingame Server Menu" + "\nkeyGui3 = Full Bright\n");
@@ -190,6 +193,7 @@ public class UndercastConfig {
         showAchievements = this.getBoolProperty("showAchievements");
         showKillAchievements = this.getBoolProperty("showKillAchievements");
         showDeathAchievements = this.getBoolProperty("showDeathAchievements");
+        showFirstBloodAchievement = this.getBoolProperty("showFirstBloodAchievement");
         configVersion = this.getIntProperty("configVersion");
         
         checkForConfigUpdate();
@@ -307,6 +311,10 @@ public class UndercastConfig {
                     config.setProperty("showDeathAchievements", "true");
                 }
             case 5:
+                if(showFirstBloodAchievement == true) {
+                    config.setProperty("showFirstBloodAchievement", "true");
+                }
+            case 6:
                 // for the next version.
             }
             config.setProperty("configVersion", ""+version);

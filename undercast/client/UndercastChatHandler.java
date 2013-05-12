@@ -112,6 +112,7 @@ public class UndercastChatHandler {
             UndercastData.isGameOver = true;
         } else if(message.toLowerCase().contains("the match has started")) {
             UndercastData.isGameOver = false;
+            UndercastData.isNextKillFirstBlood = true;
         } else if(message.equals("                    ")) {
             if(!UndercastData.welcomeMessageExpected) {
                 UndercastData.serverDetectionCommandExecuted = true;

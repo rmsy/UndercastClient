@@ -56,6 +56,8 @@ public class UndercastGuiAchievement extends GuiAchievement {
     private BufferedImage buffered;
     private ImageLoader imgLoader;
     private String killerName;
+    private String firstLine;
+    private String secondLine;
 
     public UndercastGuiAchievement(Minecraft par1Minecraft) {
         super(par1Minecraft);
@@ -89,6 +91,21 @@ public class UndercastGuiAchievement extends GuiAchievement {
         this.isFakeAchievement = true;
         this.killedOrDied = killedOrDied;
         this.killerName = killerName;
+        this.firstLine = this.killerName;
+        this.secondLine = this.killedOrDied ? "+1 Kill" : "+1 Death";
+    }
+
+    public void addFakeAchievementToMyList(Achievement par1Achievement, boolean killedOrDied, String killerName, String firstLine, String secondLine) {
+        this.achievementGetLocalText = StatCollector.translateToLocal("achievement.get");
+        this.achievementStatName = StatCollector.translateToLocal(par1Achievement.getName());
+        this.achievementTime = Minecraft.getSystemTime();
+        this.theAchievement = par1Achievement;
+        this.haveAchiement = false;
+        this.isFakeAchievement = true;
+        this.killedOrDied = killedOrDied;
+        this.killerName = killerName;
+        this.firstLine = firstLine;
+        this.secondLine = secondLine;
     }
 
     /**
@@ -167,8 +184,8 @@ public class UndercastGuiAchievement extends GuiAchievement {
                 if (this.haveAchiement) {
                     this.theGame.fontRenderer.drawSplitString(this.achievementStatName, i + 30, j + 7, 120, -1);
                 } else if (this.isFakeAchievement) {
-                    this.theGame.fontRenderer.drawString(this.killerName, i + 30, j + 7, this.killedOrDied ? 52224 : 13369344);
-                    this.theGame.fontRenderer.drawString(this.killedOrDied ? "+1 Kill" : "+1 Death", i + 30, j + 18, this.killedOrDied ? 52224 : 13369344);
+                    this.theGame.fontRenderer.drawString(this.firstLine, i + 30, j + 7, this.killedOrDied ? 52224 : 13369344);
+                    this.theGame.fontRenderer.drawString(this.secondLine, i + 30, j + 18, this.killedOrDied ? 52224 : 13369344);
                 } else {
                     this.theGame.fontRenderer.drawString(this.achievementGetLocalText, i + 30, j + 7, -256);
                     this.theGame.fontRenderer.drawString(this.achievementStatName, i + 30, j + 18, -1);
@@ -182,6 +199,7 @@ public class UndercastGuiAchievement extends GuiAchievement {
                 if (!this.isFakeAchievement) {
                     this.itemRender.renderItemAndEffectIntoGUI(this.theGame.fontRenderer, this.theGame.renderEngine, this.theAchievement.theItemStack, i + 8, j + 8);
                 } else {
+                    GL11.glPushMatrix(); // New GL11 matrix to not affect other part of the gui
                     try {
                       //Loading the buffer as a readable image and set it as GL11 texture
                         //20 is a unique id, and both 16 are for the size of the image
@@ -189,7 +207,6 @@ public class UndercastGuiAchievement extends GuiAchievement {
                     } catch (NullPointerException e) {
                         e.printStackTrace();
                     }
-                    GL11.glPushMatrix(); // New GL11 matrix to not affect other part of the gui
                     GL11.glColor4f(1, 1, 1, 1); // White light on the image
                     GL11.glScalef(1F / 16F, 1F / 16F, 1F);// Resizing the image (divided by 16 in the diagonal)
                     GL11.glTranslatef((i + 8) * 16F, (j + 8) * 16F, 0);// Translating the image in the gui
