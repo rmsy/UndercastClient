@@ -4,6 +4,7 @@ package undercast.client;
 //You may not claim this to be your own
 //You may not remove these comments
 
+import undercast.client.achievements.UndercastKillsHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.EntityPlayer;
@@ -110,6 +111,10 @@ public class UndercastChatHandler {
             }
         } else if(message.toLowerCase().contains("game over")) {
             UndercastData.isGameOver = true;
+            UndercastData.isNextKillFirstBlood = false;
+            if(UndercastData.isLastKillFromPlayer && mod_Undercast.CONFIG.showLastKillAchievement) {
+                UndercastKillsHandler.printLastKillAchievement();
+            }
         } else if(message.toLowerCase().contains("the match has started")) {
             UndercastData.isGameOver = false;
             UndercastData.isNextKillFirstBlood = true;

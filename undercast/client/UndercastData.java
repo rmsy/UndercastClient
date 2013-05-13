@@ -46,6 +46,7 @@ public class UndercastData {
     // saves if a /server command (without argument) was executed, if it's false, the user executed it
     public static boolean serverDetectionCommandExecuted = false;
     public static boolean isNextKillFirstBlood = false;
+    public static boolean isLastKillFromPlayer = false;
 
     public static boolean guiShowing;
     public static KeyBinding keybind;

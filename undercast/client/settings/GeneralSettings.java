@@ -10,9 +10,9 @@ import org.lwjgl.input.Keyboard;
 public class GeneralSettings extends GuiScreen {
 
     // Toggle settings
-    public String[] toggleSettings = new String[]{ "showGuiChat", "showGuiMulti", "toggleTitleScreenButton", "filterTips", "matchOnServerJoin", "enableButtonTooltips", "showAchievements", "showDeathAchievements", "showKillAchievements", "showFirstBloodAchievement"};
-    public String[] enabledStrings = new String[]{ "Chat gui shown", "Overcast Button shown", "Death screen cleared", "Tips filtered", "/match on server join", "Button tooltips shown", "Enabled Achievements shown", "Death Achievements shown", "Kill Achievements shown", "First Blood shown"};
-    public String[] disabledStrings = new String[]{ "Chat gui hidden", "Overcast Button hidden", " Default death screen", "No tips filtered", "No /match on server join", "Button tooltips hidden", "No Achievements shown", "No Death Achievements", "No Kill Achievements", "No First Blood Achievement"};
+    public String[] toggleSettings = new String[]{ "showGuiChat", "showGuiMulti", "toggleTitleScreenButton", "filterTips", "matchOnServerJoin", "enableButtonTooltips", "showAchievements", "showDeathAchievements", "showKillAchievements", "showFirstBloodAchievement", "showLastKillAchievement"};
+    public String[] enabledStrings = new String[]{ "Chat gui shown", "Overcast Button shown", "Death screen cleared", "Tips filtered", "/match on server join", "Button tooltips shown", "Enabled Achievements shown", "Death Achievements shown", "Kill Achievements shown", "First Blood shown", "Last Kill shown"};
+    public String[] disabledStrings = new String[]{ "Chat gui hidden", "Overcast Button hidden", " Default death screen", "No tips filtered", "No /match on server join", "Button tooltips hidden", "No Achievements shown", "No Death Achievements", "No Kill Achievements", "No First Blood Achievement", "No Last Kill Achievement"};
 
     // X Offset vars
     public GuiButton xPlusButton;
