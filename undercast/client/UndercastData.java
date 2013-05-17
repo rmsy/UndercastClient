@@ -47,6 +47,7 @@ public class UndercastData {
     public static boolean serverDetectionCommandExecuted = false;
     public static boolean isNextKillFirstBlood = false;
     public static boolean isLastKillFromPlayer = false;
+    public static String latestVersion;
 
     public static boolean guiShowing;
     public static KeyBinding keybind;

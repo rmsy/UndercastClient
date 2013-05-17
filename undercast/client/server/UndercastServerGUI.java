@@ -42,6 +42,9 @@ public class UndercastServerGUI extends GuiScreen {
         this.buttonList.add(new GuiButtonTooltip(3, this.width / 2 - 100, height - 28, 98, 20, "Player Stats", "Open your player stats in the browser"));
         this.buttonList.add(new GuiButtonTooltip(4, this.width / 2 - 150, height - 28, 48, 20, UndercastData.sortNames[UndercastData.sortIndex], "Sort the servers - Match is currently disabled (because we don't know the status)"));
         this.buttonList.add(new GuiButtonTooltip(5, this.width / 2 + 102, height - 28, 48, 20, "Lobby", "Join / Swap to the lobby"));
+        if(!UndercastData.isUpdate()) {
+            this.buttonList.add(new GuiButtonTooltip(6, this.width - 54, 21, 48, 20, "Upadate", "Opens the download website for the latest version."));
+        }
         guiServerInfoSlot = new UndercastServerInfoSlotGui(this);
     }
 
@@ -94,6 +97,12 @@ public class UndercastServerGUI extends GuiScreen {
                 mc.displayGuiScreen(new GuiConnecting(this, this.mc, joinServer));
             }
         }
+        if(guibutton.id == 6) {
+            try {
+                Desktop.getDesktop().browse(new URI(UndercastData.updateLink));
+            } catch (Exception ignored) {
+            }
+        }
     }
 
     /**
@@ -107,6 +116,10 @@ public class UndercastServerGUI extends GuiScreen {
         }
         this.guiServerInfoSlot.drawScreen(i, j, f);
         this.drawCenteredString(this.fontRenderer, "Overcast Network Server List", this.width / 2, 20, 16777215);
+        if(!UndercastData.isUpdate()) {
+            mc.fontRenderer.drawString("Used version: " +  mod_Undercast.MOD_VERSION, (this.width - 4) - mc.fontRenderer.getStringWidth("Used version: " +  mod_Undercast.MOD_VERSION), 3,13369344);
+            mc.fontRenderer.drawString("Latest version: " +  UndercastData.latestVersion, (this.width - 4) - mc.fontRenderer.getStringWidth("Latest version: " +  UndercastData.latestVersion), 12, 255);
+        }
         super.drawScreen(i, j, f);
     }
 
