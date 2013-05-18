@@ -46,7 +46,7 @@ public class UndercastKillsHandler {
             }
             UndercastData.isLastKillFromPlayer = true;
         } //when you die, but nobody killed you.
-        else if (mod_Undercast.CONFIG.showDeathAchievements && message.startsWith(username) && !message.toLowerCase().endsWith(" team")) {
+        else if (mod_Undercast.CONFIG.showDeathAchievements && message.startsWith(username) && !message.toLowerCase().endsWith(" team") && !message.toLowerCase().contains("the game")) {
             killer = username;
             killOrKilled = false;
             this.printAchievement();
