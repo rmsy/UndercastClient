@@ -37,6 +37,7 @@ public class mod_Undercast extends BaseMod {
     public float defaultLevel = mc.gameSettings.gammaSetting;
     private UndercastControls undercastControls;
     private PlayTimeCounterThread playTimeCounter;
+    private UndercastKillsHandler achievementHandler;
     private int buttonListSize;
 
     @Override
@@ -66,6 +67,8 @@ public class mod_Undercast extends BaseMod {
         //load variables defaults
         new UndercastData();
 
+        achievementHandler = new UndercastKillsHandler();
+
         //check for update
         new UndercastUpdaterThread();
 
@@ -75,7 +78,7 @@ public class mod_Undercast extends BaseMod {
                 try {
                     spoof = new URL("https://minotar.net/helm/d4jsgn9fsrl9ergn0/16.png").openConnection(); //Just hope no one will ever be named like this
                     spoof.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0; H010818)");
-                    UndercastKillsHandler.steveHeadBuffer = ((BufferedImage) ImageIO.read(spoof.getInputStream()));
+                    achievementHandler.steveHeadBuffer = ((BufferedImage) ImageIO.read(spoof.getInputStream()));
                 } catch (Exception ex) {
                     Logger.getLogger(UndercastKillsHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -92,6 +95,7 @@ public class mod_Undercast extends BaseMod {
         ModLoader.registerKey(this, UndercastData.keybind2, false);
         ModLoader.registerKey(this, UndercastData.keybind3, false);
         ModLoader.registerKey(this, UndercastData.keybind4, false);
+        
     }
 
     /**
@@ -109,7 +113,7 @@ public class mod_Undercast extends BaseMod {
             if(!message.startsWith("<") && UndercastData.isOC) {
                 new UndercastChatHandler(message, username, player);
                 if(CONFIG.showAchievements) {
-                    new UndercastKillsHandler(message, username, player);
+                    achievementHandler.handleMessage(message, username, player);
                 }
             }
         } catch(Exception e) {

@@ -53,7 +53,8 @@ public class UndercastGuiAchievement extends GuiAchievement {
     BufferedReader buffer = null;
     FileOutputStream fos = null;
     InputStream is = null;
-    private BufferedImage buffered;
+    private BufferedImage killerBuffer;
+    private BufferedImage waitingBuffer;
     private ImageLoader imgLoader;
     private String killerName;
     private String firstLine;
@@ -82,7 +83,7 @@ public class UndercastGuiAchievement extends GuiAchievement {
 
     }
 
-    public void addFakeAchievementToMyList(Achievement par1Achievement, boolean killedOrDied, String killerName) {
+    public void addFakeAchievementToMyList(Achievement par1Achievement, boolean killedOrDied, String killerName, BufferedImage killerBuffer) {
         this.achievementGetLocalText = StatCollector.translateToLocal("achievement.get");
         this.achievementStatName = StatCollector.translateToLocal(par1Achievement.getName());
         this.achievementTime = Minecraft.getSystemTime();
@@ -93,9 +94,10 @@ public class UndercastGuiAchievement extends GuiAchievement {
         this.killerName = killerName;
         this.firstLine = this.killerName;
         this.secondLine = this.killedOrDied ? "+1 Kill" : "+1 Death";
+        this.waitingBuffer = killerBuffer;
     }
 
-    public void addFakeAchievementToMyList(Achievement par1Achievement, boolean killedOrDied, String killerName, String firstLine, String secondLine) {
+    public void addFakeAchievementToMyList(Achievement par1Achievement, boolean killedOrDied, String killerName, BufferedImage killerBuffer, String firstLine, String secondLine) {
         this.achievementGetLocalText = StatCollector.translateToLocal("achievement.get");
         this.achievementStatName = StatCollector.translateToLocal(par1Achievement.getName());
         this.achievementTime = Minecraft.getSystemTime();
@@ -106,6 +108,7 @@ public class UndercastGuiAchievement extends GuiAchievement {
         this.killerName = killerName;
         this.firstLine = firstLine;
         this.secondLine = secondLine;
+        this.waitingBuffer = killerBuffer;
     }
 
     /**
@@ -154,6 +157,7 @@ public class UndercastGuiAchievement extends GuiAchievement {
 
             if (!this.haveAchiement && (d0 < 0.0D || d0 > 1.0D)) {
                 this.achievementTime = 0L;
+                this.killerBuffer = this.waitingBuffer;
             } else {
                 this.updateAchievementWindowScale();
                 GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -203,7 +207,7 @@ public class UndercastGuiAchievement extends GuiAchievement {
                     try {
                       //Loading the buffer as a readable image and set it as GL11 texture
                         //100 is a unique id, and both 16 are for the size of the image
-                        this.imgLoader.setupTexture(UndercastKillsHandler.killerBuffer, 100, 16, 16);
+                        this.imgLoader.setupTexture(this.killerBuffer, 100, 16, 16);
                     } catch (NullPointerException e) {
                         e.printStackTrace();
                     }

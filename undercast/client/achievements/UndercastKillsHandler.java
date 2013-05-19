@@ -6,13 +6,12 @@ import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-
-import undercast.client.UndercastData;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.Achievement;
+import undercast.client.UndercastConfig;
+import undercast.client.UndercastData;
 import net.minecraft.src.mod_Undercast;
 
 /**
@@ -20,40 +19,45 @@ import net.minecraft.src.mod_Undercast;
  */
 public class UndercastKillsHandler {
 
-    public static BufferedImage killerBuffer = null;
-    public static BufferedImage steveHeadBuffer = null;
+    public BufferedImage killerBuffer = null;
+    public BufferedImage steveHeadBuffer = null;
     private String killer;
     private boolean killOrKilled;
 
-    public UndercastKillsHandler(String message, String username, EntityPlayer player) {
-      //When you die from someone
-        if (mod_Undercast.CONFIG.showDeathAchievements && message.startsWith(username) && !message.toLowerCase().endsWith(" team") && (message.contains(" by ") || message.contains(" took ") || message.contains("fury of"))) {
+    public UndercastKillsHandler() {
+    }
+
+    public void handleMessage(String message, String username, EntityPlayer player) {
+        //When you die from someone
+        if (UndercastConfig.showDeathAchievements && message.startsWith(username)&& !message.toLowerCase().contains(" the game ") && !message.toLowerCase().endsWith(" team") && (message.contains(" by ") || message.contains(" took ") || message.contains("fury of"))) {
             killer = message.substring(message.indexOf("by") + 3, message.lastIndexOf("'s") == -1 ? message.length() : message.lastIndexOf("'s"));
             killOrKilled = false;
             this.printAchievement();
         } //if you kill a person
-        else if ((message.contains("by " + username) && !message.toLowerCase().contains(" destroyed by ")) || message.contains("took " + username) || message.contains("fury of " + username)) {
-            if(UndercastData.isNextKillFirstBlood){
-                if(mod_Undercast.CONFIG.showFirstBloodAchievement) {
+        else if (UndercastConfig.showKillAchievements && (message.contains("by " + username) || message.contains("took " + username) || message.contains("fury of " + username)) && !message.toLowerCase().contains(" destroyed by ")) {
+            killer = message.substring(0, message.indexOf(" "));
+            killOrKilled = true;
+            this.printAchievement();
+            UndercastData.isLastKillFromPlayer = true;
+            if (UndercastData.isNextKillFirstBlood) {
+                if (UndercastConfig.showFirstBloodAchievement) {
                     printFirstBloodAchievement();
                 }
                 UndercastData.isNextKillFirstBlood = false;
             }
-            if (mod_Undercast.CONFIG.showKillAchievements) {
-                killer = message.substring(0, message.indexOf(" "));
-                killOrKilled = true;
-                this.printAchievement();
-            }
-            UndercastData.isLastKillFromPlayer = true;
         } //when you die, but nobody killed you.
-        else if (mod_Undercast.CONFIG.showDeathAchievements && message.startsWith(username) && !message.toLowerCase().endsWith(" team") && !message.toLowerCase().contains("the game")) {
+        else if (UndercastConfig.showDeathAchievements && message.startsWith(username) && !message.toLowerCase().endsWith(" team")) {
             killer = username;
             killOrKilled = false;
             this.printAchievement();
+        } else if (message.toLowerCase().contains("game over")) {
+            if (UndercastData.isLastKillFromPlayer && mod_Undercast.CONFIG.showLastKillAchievement) {
+                printLastKillAchievement();
+            }
         } //When someone die
-        else if ((message.contains("by ") || message.contains("took ") || message.contains("fury of ")) && !message.toLowerCase().endsWith(" team") && !message.toLowerCase().contains(" destroyed by ")) {
-            UndercastData.isNextKillFirstBlood = false;
+        else if ((message.contains("by ") || message.contains("took ") || message.contains("fury of ")) && !message.toLowerCase().endsWith(" team")) {
             UndercastData.isLastKillFromPlayer = false;
+            UndercastData.isNextKillFirstBlood = false;
         }
     }
 
@@ -70,7 +74,7 @@ public class UndercastKillsHandler {
                     killerBuffer = ((BufferedImage) ImageIO.read(spoof.getInputStream()));
                     System.out.println("finished");
                 } catch (Exception ex) {
-                    System.out.println(ex);
+                    Logger.getLogger(UndercastKillsHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         };
@@ -79,9 +83,9 @@ public class UndercastKillsHandler {
                 try {
                     Thread.sleep(1000L);
                     Achievement custom = (new Achievement(27, "custom", 1, 4, Item.ingotIron, (Achievement) null));
-                    UndercastGuiAchievement gui = new UndercastGuiAchievement(Minecraft.getMinecraft());
-                    Minecraft.getMinecraft().guiAchievement = gui;
-                    gui.addFakeAchievementToMyList(custom, killOrKilled, killer);
+                   UndercastGuiAchievement gui = new UndercastGuiAchievement(Minecraft.getMinecraft());
+                   Minecraft.getMinecraft().guiAchievement = gui;
+                   gui.addFakeAchievementToMyList(custom, killOrKilled, killer, killerBuffer);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(UndercastKillsHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -91,17 +95,16 @@ public class UndercastKillsHandler {
         Thread t2 = new Thread(r2);
         t1.start();
         t2.start();
-
     }
 
-    public static void printFirstBloodAchievement() {
+    public void printFirstBloodAchievement() {
         final long waitingTime;
-        if (mod_Undercast.CONFIG.showAchievements && mod_Undercast.CONFIG.showKillAchievements) {
+        if (UndercastConfig.showAchievements && UndercastConfig.showKillAchievements) {
             waitingTime = 4000L;
         } else {
             waitingTime = 0L;
         }
-        UndercastKillsHandler.killerBuffer = UndercastKillsHandler.steveHeadBuffer;
+        killerBuffer = steveHeadBuffer;
         //Thread charged to load the achievment gui
         Runnable r1 = new Runnable() {
             public void run() {
@@ -110,7 +113,7 @@ public class UndercastKillsHandler {
                     System.out.println("Beginning");
                     spoof = new URL("https://minotar.net/helm/" + Minecraft.getMinecraft().thePlayer.username + "/16.png").openConnection();
                     spoof.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0; H010818)");
-                    UndercastKillsHandler.killerBuffer = ((BufferedImage) ImageIO.read(spoof.getInputStream()));
+                    killerBuffer = ((BufferedImage) ImageIO.read(spoof.getInputStream()));
                     System.out.println("finished");
                 } catch (Exception ex) {
                     Logger.getLogger(UndercastKillsHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,8 +126,9 @@ public class UndercastKillsHandler {
                     Thread.sleep(waitingTime);
                     Achievement custom = (new Achievement(27, "custom", 1, 4, Item.ingotIron, (Achievement) null));
                     Minecraft client = Minecraft.getMinecraft();
-                    ((UndercastGuiAchievement) client.guiAchievement)
-                            .addFakeAchievementToMyList(custom, true, client.thePlayer.username, client.thePlayer.username, "got the first Blood!");
+                    UndercastGuiAchievement gui = new UndercastGuiAchievement(Minecraft.getMinecraft());
+                    client.guiAchievement = gui;
+                    gui.addFakeAchievementToMyList(custom, true, client.thePlayer.username, killerBuffer, client.thePlayer.username, "got the first Blood!");
                 } catch (InterruptedException ex) {
                     Logger.getLogger(UndercastKillsHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -136,8 +140,8 @@ public class UndercastKillsHandler {
         t2.start();
     }
 
-    public static void printLastKillAchievement() {
-        UndercastKillsHandler.killerBuffer = UndercastKillsHandler.steveHeadBuffer;
+    public void printLastKillAchievement() {
+        killerBuffer = steveHeadBuffer;
         //Thread charged to load the achievment gui
         Runnable r1 = new Runnable() {
             public void run() {
@@ -146,7 +150,7 @@ public class UndercastKillsHandler {
                     System.out.println("Beginning");
                     spoof = new URL("https://minotar.net/helm/" + Minecraft.getMinecraft().thePlayer.username + "/16.png").openConnection();
                     spoof.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0; H010818)");
-                    UndercastKillsHandler.killerBuffer = ((BufferedImage) ImageIO.read(spoof.getInputStream()));
+                    killerBuffer = ((BufferedImage) ImageIO.read(spoof.getInputStream()));
                     System.out.println("finished");
                 } catch (Exception ex) {
                     Logger.getLogger(UndercastKillsHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,8 +161,9 @@ public class UndercastKillsHandler {
             public void run() {
                 Achievement custom = (new Achievement(27, "custom", 1, 4, Item.ingotIron, (Achievement) null));
                 Minecraft client = Minecraft.getMinecraft();
-                ((UndercastGuiAchievement) client.guiAchievement)
-                        .addFakeAchievementToMyList(custom, true, client.thePlayer.username, client.thePlayer.username, "got the last Kill!");
+                UndercastGuiAchievement gui = new UndercastGuiAchievement(Minecraft.getMinecraft());
+                client.guiAchievement = gui;
+                gui.addFakeAchievementToMyList(custom, true, client.thePlayer.username, killerBuffer, client.thePlayer.username, "got the last Kill!");
 
             }
         };

@@ -112,9 +112,6 @@ public class UndercastChatHandler {
         } else if(message.toLowerCase().contains("game over")) {
             UndercastData.isGameOver = true;
             UndercastData.isNextKillFirstBlood = false;
-            if(UndercastData.isLastKillFromPlayer && mod_Undercast.CONFIG.showLastKillAchievement) {
-                UndercastKillsHandler.printLastKillAchievement();
-            }
             try {
                 // stop the timer
                 UndercastData.matchTimer.stop();
