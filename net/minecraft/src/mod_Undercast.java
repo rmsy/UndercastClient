@@ -174,6 +174,11 @@ public class mod_Undercast extends BaseMod {
                 mc.fontRenderer.drawStringWithShadow(UndercastCustomMethods.getPlayingTimeString(), width, height, 16777215);
                 height += 8;
             }
+            // Match Time display:
+            if (CONFIG.showMatchTime && !UndercastData.isLobby) {
+                mc.fontRenderer.drawStringWithShadow(UndercastCustomMethods.getMatchTimeString(), width, height, 16777215);
+                height += 8;
+            }
             // Map fetcher:
             if (CONFIG.showMap && !UndercastData.isLobby) {
                 if (UndercastData.getMap() != null) {

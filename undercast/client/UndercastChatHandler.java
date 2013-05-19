@@ -115,9 +115,27 @@ public class UndercastChatHandler {
             if(UndercastData.isLastKillFromPlayer && mod_Undercast.CONFIG.showLastKillAchievement) {
                 UndercastKillsHandler.printLastKillAchievement();
             }
+            try {
+                // stop the timer
+                UndercastData.matchTimer.stop();
+            } catch (Exception ignored) {
+            }
         } else if(message.toLowerCase().contains("the match has started")) {
             UndercastData.isGameOver = false;
             UndercastData.isNextKillFirstBlood = true;
+            
+            // stop the timer
+            try {
+                UndercastData.matchTimer.stop();
+            } catch (Exception ignored) {
+            }
+            //and start one which starts from 0
+            UndercastData.incrementMatchTime = true;
+            UndercastData.matchTimeHours = 0;
+            UndercastData.matchTimeMin = 0;
+            UndercastData.matchTimeSec = 0;
+            UndercastData.matchTimer = new MatchTimer();
+            
         } else if(message.equals("                    ")) {
             if(!UndercastData.welcomeMessageExpected) {
                 UndercastData.serverDetectionCommandExecuted = true;
@@ -125,9 +143,43 @@ public class UndercastChatHandler {
             } else {
                 UndercastData.welcomeMessageExpected = false;
             }
-            if(mod_Undercast.CONFIG.matchOnServerJoin) {
+            if(mod_Undercast.CONFIG.matchOnServerJoin || mod_Undercast.CONFIG.showMatchTime) {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/match");
             }
+        // start and sync the match timer
+        } else if(message.toLowerCase().contains("time:") || message.toLowerCase().contains("score:") || message.toLowerCase().contains("time remaining: ")) {
+             System.out.println(message);
+            String time = "-2:-2";
+            String messageToReplace;
+            // stop the timer
+            try {
+                UndercastData.matchTimer.stop();
+            } catch (Exception ignored) {
+            }
+            // extract the time
+            messageToReplace = message.split("[0-9]{1,2}[:]{1}[0-5]?[0-9]{1}[:]?[0-5]?[0-9]?")[0];
+            time = message.replace(messageToReplace, "");
+            
+            // detect if it should increment or decrement
+            if(messageToReplace.toLowerCase().contains("time:")) {
+                UndercastData.incrementMatchTime = true;
+            } else {
+                UndercastData.incrementMatchTime = false;
+            }
+            
+            // read the time
+            String[] numbers = time.split("[:]{1}");
+            if(numbers.length == 3) {
+                UndercastData.matchTimeHours = Integer.parseInt(numbers[0]);
+                UndercastData.matchTimeMin = Integer.parseInt(numbers[1]);
+                UndercastData.matchTimeSec = Integer.parseInt(numbers[2]);
+            } else {
+                UndercastData.matchTimeHours = 0;
+                UndercastData.matchTimeMin = Integer.parseInt(numbers[0]);
+                UndercastData.matchTimeSec = Integer.parseInt(numbers[1]);
+            }
+            // start the timer
+            UndercastData.matchTimer = new MatchTimer();
         }
     }
 }

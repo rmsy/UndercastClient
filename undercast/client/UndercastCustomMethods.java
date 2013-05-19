@@ -9,6 +9,7 @@ import net.minecraft.src.ChatAllowedCharacters;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.Packet;
 import net.minecraft.src.StringUtils;
+import net.minecraft.src.mod_Undercast;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -87,6 +88,17 @@ public class UndercastCustomMethods {
         UndercastData.resetKillstreak();
         UndercastData.resetLargestKillstreak();
         UndercastData.isGameOver = false;
+
+        // stop the timer and reset it
+        try {
+            UndercastData.matchTimer.stop();
+        } catch (Exception ignored) {
+        }
+        //and start one which starts from 0
+        UndercastData.incrementMatchTime = true;
+        UndercastData.matchTimeHours = 0;
+        UndercastData.matchTimeMin = 0;
+        UndercastData.matchTimeSec = 0;
     }
 
     /**
@@ -98,6 +110,31 @@ public class UndercastCustomMethods {
             return "Playing Time: \u00A7E" + UndercastData.playTimeMin + "\u00A7Fmin";
         } else {
             return "Playing Time: \u00A7E" + UndercastData.playTimeHours + "\u00A7Fh \u00A7E" + UndercastData.playTimeMin + "\u00A7Fmin";
+        }
+    }
+
+    public static String getMatchTimeString() {
+        // if it's a map with time limit and it's enabled in the config
+        if(!UndercastData.incrementMatchTime && mod_Undercast.CONFIG.showMatchTimeSeconds) {
+            if(UndercastData.matchTimeHours == 0 && UndercastData.matchTimeMin == 0) {
+                return "Playing Time: \u00A7E" + UndercastData.matchTimeSec + "\u00A7Fsec";
+            } else if (UndercastData.matchTimeHours == 0) {
+                return "Playing Time: \u00A7E" + UndercastData.matchTimeMin + "\u00A7Fmin \u00A7E" + UndercastData.matchTimeSec + "\u00A7Fsec";
+            } else {
+                return "Playing Time: \u00A7E" + UndercastData.matchTimeHours + "\u00A7Fh \u00A7E" + UndercastData.matchTimeMin + "\u00A7Fmin \u00A7E" + UndercastData.matchTimeSec + "\u00A7Fsec";
+            }
+        } else {
+            if(UndercastData.matchTimeHours == 0 && UndercastData.matchTimeMin == 0) {
+                if(UndercastData.matchTimeSec <= 0) {
+                    return "Playing Time: \u00A7E0\u00A7Fmin";
+                } else {
+                    return "Playing Time: \u00A7E>1\u00A7Fmin";
+                }
+            } else if (UndercastData.matchTimeHours == 0) {
+                return "Playing Time: \u00A7E" + UndercastData.matchTimeMin + "\u00A7Fmin";
+            } else {
+                return "Playing Time: \u00A7E" + UndercastData.matchTimeHours + "\u00A7Fh \u00A7E" + UndercastData.matchTimeMin + "\u00A7Fmin";
+            }
         }
     }
 

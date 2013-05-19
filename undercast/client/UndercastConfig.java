@@ -33,6 +33,8 @@ public class UndercastConfig {
     public static boolean showGuiChat;
     public static boolean showGuiMulti;
     public static boolean showPlayingTime;
+    public static boolean showMatchTime;
+    public static boolean showMatchTimeSeconds;
     public static int x;
     public static int y;
     public static boolean toggleTitleScreenButton;
@@ -71,6 +73,8 @@ public class UndercastConfig {
         defaults.setProperty("showGuiChat", "true");
         defaults.setProperty("showGuiMulti", "true");
         defaults.setProperty("showPlayingTime", "false");
+        defaults.setProperty("showMatchTime", "true");
+        defaults.setProperty("showMatchTimeSeconds", "true");
         defaults.setProperty("X", "2");
         defaults.setProperty("Y", "2");
         defaults.setProperty("toggleTitleScreenButton", "true");
@@ -146,6 +150,8 @@ public class UndercastConfig {
             config.setProperty("showGuiChat", "true");
             config.setProperty("showGuiMulti", "true");
             config.setProperty("showPlayingTime", "false");
+            config.setProperty("showMatchTime", "true");
+            config.setProperty("showMatchTimeSeconds", "true");
             config.setProperty("X", "2");
             config.setProperty("Y", "2");
             config.setProperty("toggleTitleScreenButton", "true");
@@ -186,6 +192,8 @@ public class UndercastConfig {
         showGuiChat = this.getBoolProperty("showGuiChat");
         showGuiMulti = this.getBoolProperty("showGuiMulti");
         showPlayingTime = this.getBoolProperty("showPlayingTime");
+        showMatchTime = this.getBoolProperty("showMatchTime");
+        showMatchTimeSeconds = this.getBoolProperty("showMatchTimeSeconds");
         x = this.getIntProperty("X");
         y = this.getIntProperty("Y");
         toggleTitleScreenButton = this.getBoolProperty("toggleTitleScreenButton");
@@ -320,6 +328,12 @@ public class UndercastConfig {
                 }
                 if(showLastKillAchievement == true) {
                     config.setProperty("showLastKillAchievement", "true");
+                }
+                if(showMatchTime == true) {
+                    config.setProperty("showMatchTime", "true");
+                }
+                if(showMatchTimeSeconds == true) {
+                    config.setProperty("showMatchTimeSeconds", "true");
                 }
             case 6:
                 // for the next version.
