@@ -54,12 +54,11 @@ public class UndercastGuiAchievement extends GuiAchievement {
     FileOutputStream fos = null;
     InputStream is = null;
     private BufferedImage killerBuffer;
-    private BufferedImage waitingBuffer;
+    private BufferedImage waitingBuffer[];
     private ImageLoader imgLoader;
     private String killerName;
     private String firstLine;
     private String secondLine;
-    private boolean doesItNeedNewBuffer = true;
 
     public UndercastGuiAchievement(Minecraft par1Minecraft) {
         super(par1Minecraft);
@@ -67,6 +66,7 @@ public class UndercastGuiAchievement extends GuiAchievement {
         this.itemRender = new RenderItem();
         isFakeAchievement = false;
         killedOrDied = false;
+        waitingBuffer = new BufferedImage[10];
         this.imgLoader = new ImageLoader(par1Minecraft.texturePackList, par1Minecraft.gameSettings);
     }
 
@@ -80,8 +80,6 @@ public class UndercastGuiAchievement extends GuiAchievement {
         this.theAchievement = par1Achievement;
         this.haveAchiement = false;
         this.isFakeAchievement = false;
-
-
     }
 
     public void addFakeAchievementToMyList(Achievement par1Achievement, boolean killedOrDied, String killerName, BufferedImage killerBuffer) {
@@ -95,8 +93,11 @@ public class UndercastGuiAchievement extends GuiAchievement {
         this.killerName = killerName;
         this.firstLine = this.killerName;
         this.secondLine = this.killedOrDied ? "+1 Kill" : "+1 Death";
-        this.waitingBuffer = killerBuffer;
-        this.doesItNeedNewBuffer = true;
+        for (int i = 0; i < waitingBuffer.length; i++) {
+            if (waitingBuffer[i] == null) {
+                this.waitingBuffer[i] = killerBuffer;
+            }
+        }
     }
 
     public void addFakeAchievementToMyList(Achievement par1Achievement, boolean killedOrDied, String killerName, BufferedImage killerBuffer, String firstLine, String secondLine) {
@@ -110,8 +111,11 @@ public class UndercastGuiAchievement extends GuiAchievement {
         this.killerName = killerName;
         this.firstLine = firstLine;
         this.secondLine = secondLine;
-        this.waitingBuffer = killerBuffer;
-        this.doesItNeedNewBuffer = true;
+        for (int i = 0; i < waitingBuffer.length; i++) {
+            if (waitingBuffer[i] == null) {
+                this.waitingBuffer[i] = killerBuffer;
+            }
+        }
     }
 
     /**
@@ -161,9 +165,12 @@ public class UndercastGuiAchievement extends GuiAchievement {
             if (!this.haveAchiement && (d0 < 0.0D || d0 > 1.0D)) {
                 this.achievementTime = 0L;
             } else {
-                if(doesItNeedNewBuffer) {
-                    this.killerBuffer = this.waitingBuffer;
-                    doesItNeedNewBuffer = false;
+                if (waitingBuffer[0] != null) {
+                    this.killerBuffer = this.waitingBuffer[0];
+                    for(int i = 1; i< waitingBuffer.length ; i++){
+                        waitingBuffer[i - 1] = waitingBuffer[i];
+                    }
+                    waitingBuffer[waitingBuffer.length - 1] = null;
                 }
                 this.updateAchievementWindowScale();
                 GL11.glDisable(GL11.GL_DEPTH_TEST);
